@@ -11,12 +11,12 @@ import javax.persistence.*;
 @Entity
 @Table
 public class User {
-    public String getId() {
-        return id;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getFirstName() {
@@ -62,7 +62,7 @@ public class User {
     @Id
     @GenericGenerator(name="customUUID", strategy="uuid2")
     @GeneratedValue(generator = "customUUID")
-    private  String id;
+    private  String userId;
     @NotNull
     private String firstName;
     @NotNull
