@@ -1,4 +1,4 @@
-package movieflix.service;
+package movieflix;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
