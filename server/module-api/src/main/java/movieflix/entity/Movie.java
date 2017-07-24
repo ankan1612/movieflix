@@ -1,10 +1,9 @@
 package movieflix.entity;
 
 import com.sun.istack.internal.NotNull;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.util.*;
 
 /**
  * Created by Ankan on 7/23/2017.
@@ -14,6 +13,33 @@ import java.util.Date;
 public class Movie {
     @Id
     private  String imdbId;
+    @NotNull
+    private String title;
+    private int year;
+    private int rated;
+    @Temporal(TemporalType.DATE)
+    private Date released;
+    private String runtime;
+    @OneToMany
+    private List<Genre> genre;
+    @OneToMany
+    private List<Director> director;
+    @OneToMany
+    private List<Writer> writer;
+    @OneToMany
+    private List<Actor> actor;
+    private String plot;
+    @OneToMany
+    private List<Language> language;
+    @OneToMany
+    private List<Country> country;
+    private String awards;
+    private String poster;
+    private int metaScore;
+    private int imdbRating;
+    private int imdbVotes;
+    private int userRating;
+    private String type;
 
     public String getImdbId() {
         return imdbId;
@@ -63,35 +89,35 @@ public class Movie {
         this.runtime = runtime;
     }
 
-    public Genre getGenre() {
+    public List<Genre> getGenre() {
         return genre;
     }
 
-    public void setGenre(Genre genre) {
+    public void setGenre(List<Genre> genre) {
         this.genre = genre;
     }
 
-    public Director getDirector() {
+    public List<Director> getDirector() {
         return director;
     }
 
-    public void setDirector(Director director) {
+    public void setDirector(List<Director> director) {
         this.director = director;
     }
 
-    public Writer getWriter() {
+    public List<Writer> getWriter() {
         return writer;
     }
 
-    public void setWriter(Writer writer) {
+    public void setWriter(List<Writer> writer) {
         this.writer = writer;
     }
 
-    public Actor getActor() {
+    public List<Actor> getActor() {
         return actor;
     }
 
-    public void setActor(Actor actor) {
+    public void setActor(List<Actor> actor) {
         this.actor = actor;
     }
 
@@ -103,19 +129,19 @@ public class Movie {
         this.plot = plot;
     }
 
-    public Language getLanguage() {
+    public List<Language> getLanguage() {
         return language;
     }
 
-    public void setLanguage(Language language) {
+    public void setLanguage(List<Language> language) {
         this.language = language;
     }
 
-    public Country getCountry() {
+    public List<Country> getCountry() {
         return country;
     }
 
-    public void setCountry(Country country) {
+    public void setCountry(List<Country> country) {
         this.country = country;
     }
 
@@ -174,32 +200,4 @@ public class Movie {
     public void setType(String type) {
         this.type = type;
     }
-
-    @NotNull
-    private String title;
-    private int year;
-    private int rated;
-    @Temporal(TemporalType.DATE)
-    private Date released;
-    private String runtime;
-    @OneToMany
-    private Genre genre;
-    @OneToMany
-    private Director director;
-    @OneToMany
-    private Writer writer;
-    @OneToMany
-    private Actor actor;
-    private String plot;
-    @OneToMany
-    private Language language;
-    @OneToMany
-    private Country country;
-    private String awards;
-    private String poster;
-    private int metaScore;
-    private int imdbRating;
-    private int imdbVotes;
-    private int userRating;
-    private String type;
 }

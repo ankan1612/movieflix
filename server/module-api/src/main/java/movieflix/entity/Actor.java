@@ -18,6 +18,8 @@ public class Actor {
     @GenericGenerator(name="customUUID", strategy="uuid2")
     @GeneratedValue(generator = "customUUID")
     private  String actorId;
+    @NotNull
+    private String name;
 
     public String getActorId() {
         return actorId;
@@ -34,7 +36,4 @@ public class Actor {
     public void setName(String name) {
         this.name = name;
     }
-
-    @NotNull
-    private String name;
 }
