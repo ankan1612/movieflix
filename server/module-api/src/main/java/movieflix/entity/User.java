@@ -10,6 +10,10 @@ import javax.persistence.*;
  */
 @Entity
 @Table
+@NamedQueries({
+        @NamedQuery(name = "User.findAll", query = "SELECT u from  User  u ORDER BY u.email ASC"),
+        @NamedQuery(name = "User.findByEmail", query = "SELECT u from User u WHERE u.email=:pEmail")
+})
 public class User {
     public String getUserId() {
         return userId;
