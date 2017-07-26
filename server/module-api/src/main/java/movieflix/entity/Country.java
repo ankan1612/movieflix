@@ -3,16 +3,17 @@ package movieflix.entity;
 import com.sun.istack.internal.NotNull;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Created by Ankan on 7/23/2017.
  */
 @Entity
 @Table
+@NamedQueries({
+        @NamedQuery(name = "User.findAll", query = "SELECT c from  Country  c ORDER BY c.countryId ASC"),
+        @NamedQuery(name = "User.findByName", query = "SELECT c from Country  c WHERE c.name=:pName")
+})
 public class Country {
     public String getCountryId() {
         return countryId;

@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Entity
 @Table
 @NamedQueries({
-        @NamedQuery(name = "Actor.findAll", query = "SELECT a from  Actor  a ORDER BY a.id ASC")
+        @NamedQuery(name = "Actor.findAll", query = "SELECT a from  Actor  a ORDER BY a.actorId ASC")
 })
 public class Actor {
     @Id
