@@ -10,7 +10,7 @@ import java.util.List;
 public interface IActorService {
     public List<Actor> findAll();
     public Actor findOne(String id);
-    public  Actor create(Actor user);
-    public  Actor update(String id, Actor user);
+    public  Actor create(Actor actor);
+    public  Actor update(String id, Actor actor);
     public void  delete(String id);
 }

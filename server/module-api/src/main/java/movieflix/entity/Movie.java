@@ -10,6 +10,9 @@ import java.util.*;
  */
 @Entity
 @Table
+@NamedQueries({
+        @NamedQuery(name = "Movie.findAll", query = "SELECT m from  Movie  m ORDER BY m.imdbId ASC")
+})
 public class Movie {
     @Id
     private  String imdbId;

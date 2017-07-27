@@ -11,8 +11,8 @@ import javax.persistence.*;
 @Entity
 @Table
 @NamedQueries({
-        @NamedQuery(name = "User.findAll", query = "SELECT c from  Country  c ORDER BY c.countryId ASC"),
-        @NamedQuery(name = "User.findByName", query = "SELECT c from Country  c WHERE c.name=:pName")
+        @NamedQuery(name = "Country.findAll", query = "SELECT c from  Country  c ORDER BY c.countryId ASC"),
+        @NamedQuery(name = "Country.findByName", query = "SELECT c from Country  c WHERE c.name=:pName")
 })
 public class Country {
     public String getCountryId() {
