@@ -18,7 +18,8 @@ public class Rating {
     @GeneratedValue(generator = "customUUID")
     private  String ratingId;
     @NotNull
-    @OneToOne
+    @ManyToOne(cascade=CascadeType.ALL)
+    @JoinTable(name="Rating_Movie", joinColumns=@JoinColumn(name="ratingID"), inverseJoinColumns=@JoinColumn(name="imdbId"))
     private Movie movie;
     @NotNull
     @OneToOne

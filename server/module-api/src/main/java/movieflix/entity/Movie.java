@@ -18,31 +18,42 @@ public class Movie {
     private  String imdbId;
     @NotNull
     private String title;
-    private int year;
+    @ManyToOne(cascade=CascadeType.ALL)
+    @JoinTable(name="Movie_Year", joinColumns=@JoinColumn(name="imdbId"), inverseJoinColumns=@JoinColumn(name="yearID"))
+    private Year year;
     private int rated;
     @Temporal(TemporalType.DATE)
     private Date released;
     private String runtime;
-    @OneToMany
+    @ManyToMany(cascade=CascadeType.ALL)
+    @JoinTable(name="Movie_Genre", joinColumns=@JoinColumn(name="imdbId"), inverseJoinColumns=@JoinColumn(name="genreID"))
     private List<Genre> genre;
-    @OneToMany
+    @ManyToMany(cascade=CascadeType.ALL)
+    @JoinTable(name="Movie_Director", joinColumns=@JoinColumn(name="imdbId"), inverseJoinColumns=@JoinColumn(name="directorID"))
     private List<Director> director;
-    @OneToMany
+    @ManyToMany(cascade=CascadeType.ALL)
+    @JoinTable(name="Movie_Writer", joinColumns=@JoinColumn(name="imdbId"), inverseJoinColumns=@JoinColumn(name="writerID"))
     private List<Writer> writer;
-    @OneToMany
+    @ManyToMany(cascade=CascadeType.ALL)
+    @JoinTable(name="Movie_Actor", joinColumns=@JoinColumn(name="imdbId"), inverseJoinColumns=@JoinColumn(name="actorID"))
     private List<Actor> actor;
     private String plot;
-    @OneToMany
+    @ManyToMany(cascade=CascadeType.ALL)
+    @JoinTable(name="Movie_Language", joinColumns=@JoinColumn(name="imdbId"), inverseJoinColumns=@JoinColumn(name="langID"))
     private List<Language> language;
-    @OneToMany
+    @ManyToMany(cascade=CascadeType.ALL)
+    @JoinTable(name="Movie_Country", joinColumns=@JoinColumn(name="imdbId"), inverseJoinColumns=@JoinColumn(name="countryID"))
     private List<Country> country;
     private String awards;
     private String poster;
     private int metaScore;
     private int imdbRating;
     private int imdbVotes;
-    private int userRating;
-    private String type;
+    @OneToMany(cascade=CascadeType.ALL, mappedBy="movie")
+    private List<Rating> userRating;
+    @ManyToOne(cascade=CascadeType.ALL)
+    @JoinTable(name="Movie_Type", joinColumns=@JoinColumn(name="imdbId"), inverseJoinColumns=@JoinColumn(name="typeID"))
+    private Type type;
 
     public String getImdbId() {
         return imdbId;
@@ -60,11 +71,11 @@ public class Movie {
         this.title = title;
     }
 
-    public int getYear() {
+    public Year getYear() {
         return year;
     }
 
-    public void setYear(int year) {
+    public void setYear(Year year) {
         this.year = year;
     }
 
@@ -188,19 +199,19 @@ public class Movie {
         this.imdbVotes = imdbVotes;
     }
 
-    public int getUserRating() {
+    public List<Rating> getUserRating() {
         return userRating;
     }
 
-    public void setUserRating(int userRating) {
+    public void setUserRating(List<Rating> userRating) {
         this.userRating = userRating;
     }
 
-    public String getType() {
+    public Type getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(Type type) {
         this.type = type;
     }
 }

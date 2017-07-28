@@ -4,6 +4,8 @@ import com.sun.istack.internal.NotNull;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Ankan on 7/23/2017.
@@ -14,6 +16,7 @@ import javax.persistence.*;
         @NamedQuery(name = "Director.findAll", query = "SELECT w from  Writer w ORDER BY w.writerId ASC")
 })
 public class Writer {
+
     public String getWriterId() {
         return writerId;
     }
@@ -36,4 +39,14 @@ public class Writer {
     private  String writerId;
     @NotNull
     private String name;
+    @ManyToMany(cascade=CascadeType.ALL, mappedBy="writer")
+    private List<Movie> movie;
+
+    public List<Movie> getMovie() {
+        return movie;
+    }
+
+    public void setMovie(List<Movie> movie) {
+        this.movie = movie;
+    }
 }

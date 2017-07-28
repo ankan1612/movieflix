@@ -4,6 +4,8 @@ import com.sun.istack.internal.NotNull;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Ankan on 7/23/2017.
@@ -15,6 +17,7 @@ import javax.persistence.*;
         @NamedQuery(name = "Genre.findByName", query = "SELECT g from Genre  g WHERE c.name=:pName")
 })
 public class Genre {
+
     public String getGenreId() {
         return genreId;
     }
@@ -37,4 +40,14 @@ public class Genre {
     private  String genreId;
     @NotNull
     private String name;
+    @ManyToMany(cascade=CascadeType.ALL, mappedBy="genre")
+    private List<Movie> movie;
+
+    public List<Movie> getMovie() {
+        return movie;
+    }
+
+    public void setMovie(List<Movie> movie) {
+        this.movie = movie;
+    }
 }

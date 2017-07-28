@@ -4,6 +4,8 @@ import com.sun.istack.internal.NotNull;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Ankan on 7/23/2017.
@@ -15,6 +17,7 @@ import javax.persistence.*;
         @NamedQuery(name = "Country.findByName", query = "SELECT c from Country  c WHERE c.name=:pName")
 })
 public class Country {
+
     public String getCountryId() {
         return countryId;
     }
@@ -37,5 +40,15 @@ public class Country {
     private  String countryId;
     @NotNull
     private String name;
+    @ManyToMany(cascade=CascadeType.ALL, mappedBy="country")
+    private List<Movie> movie;
+
+    public List<Movie> getMovie() {
+        return movie;
+    }
+
+    public void setMovie(List<Movie> movie) {
+        this.movie = movie;
+    }
 }
 

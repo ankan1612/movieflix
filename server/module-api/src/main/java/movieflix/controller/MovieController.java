@@ -23,7 +23,7 @@ public class MovieController {
     {
         return service.findAll();
     }
-    @RequestMapping(method = RequestMethod.GET, path = "{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Movie findOne(@PathVariable("id") String id)
     {
         return service.findOne(id);
