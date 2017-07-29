@@ -22,16 +22,6 @@ public class Actor {
     private  String actorId;
     @NotNull
     private String name;
-    @ManyToMany(cascade=CascadeType.ALL, mappedBy="actor")
-    private List<Movie> movie;
-
-    public List<Movie> getMovie() {
-        return movie;
-    }
-
-    public void setMovie(List<Movie> movie) {
-        this.movie = movie;
-    }
 
     public String getActorId() {
         return actorId;

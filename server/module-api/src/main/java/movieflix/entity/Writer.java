@@ -39,14 +39,5 @@ public class Writer {
     private  String writerId;
     @NotNull
     private String name;
-    @ManyToMany(cascade=CascadeType.ALL, mappedBy="writer")
-    private List<Movie> movie;
 
-    public List<Movie> getMovie() {
-        return movie;
-    }
-
-    public void setMovie(List<Movie> movie) {
-        this.movie = movie;
-    }
 }

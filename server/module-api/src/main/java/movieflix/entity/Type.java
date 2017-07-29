@@ -26,9 +26,6 @@ public class Type {
     @NotNull
     private String type;
 
-    @OneToMany(cascade=CascadeType.ALL, mappedBy="type")
-    private List<Movie> movie;
-
     public String getTypeId() {
         return typeId;
     }
@@ -43,13 +40,5 @@ public class Type {
 
     public void setType(String type) {
         this.type = type;
-    }
-
-    public List<Movie> getMovie() {
-        return movie;
-    }
-
-    public void setMovie(List<Movie> movie) {
-        this.movie = movie;
     }
 }

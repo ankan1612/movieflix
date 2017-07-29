@@ -40,14 +40,5 @@ public class Language {
     private  String langId;
     @NotNull
     private String name;
-    @ManyToMany(cascade=CascadeType.ALL, mappedBy="language")
-    private List<Movie> movie;
 
-    public List<Movie> getMovie() {
-        return movie;
-    }
-
-    public void setMovie(List<Movie> movie) {
-        this.movie = movie;
-    }
 }

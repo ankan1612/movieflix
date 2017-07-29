@@ -40,14 +40,5 @@ public class Genre {
     private  String genreId;
     @NotNull
     private String name;
-    @ManyToMany(cascade=CascadeType.ALL, mappedBy="genre")
-    private List<Movie> movie;
 
-    public List<Movie> getMovie() {
-        return movie;
-    }
-
-    public void setMovie(List<Movie> movie) {
-        this.movie = movie;
-    }
 }

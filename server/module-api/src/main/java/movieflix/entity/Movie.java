@@ -18,10 +18,8 @@ public class Movie {
     private  String imdbId;
     @NotNull
     private String title;
-    @ManyToOne(cascade=CascadeType.ALL)
-    @JoinTable(name="Movie_Year", joinColumns=@JoinColumn(name="imdbId"), inverseJoinColumns=@JoinColumn(name="yearID"))
-    private Year year;
-    private int rated;
+    private int year;
+    private String rated;
     @Temporal(TemporalType.DATE)
     private Date released;
     private String runtime;
@@ -47,10 +45,9 @@ public class Movie {
     private String awards;
     private String poster;
     private int metaScore;
-    private int imdbRating;
+    private double imdbRating;
     private int imdbVotes;
-    @OneToMany(cascade=CascadeType.ALL, mappedBy="movie")
-    private List<Rating> userRating;
+    private double userRating;
     @ManyToOne(cascade=CascadeType.ALL)
     @JoinTable(name="Movie_Type", joinColumns=@JoinColumn(name="imdbId"), inverseJoinColumns=@JoinColumn(name="typeID"))
     private Type type;
@@ -71,19 +68,19 @@ public class Movie {
         this.title = title;
     }
 
-    public Year getYear() {
+    public int getYear() {
         return year;
     }
 
-    public void setYear(Year year) {
+    public void setYear(int year) {
         this.year = year;
     }
 
-    public int getRated() {
+    public String getRated() {
         return rated;
     }
 
-    public void setRated(int rated) {
+    public void setRated(String rated) {
         this.rated = rated;
     }
 
@@ -183,11 +180,11 @@ public class Movie {
         this.metaScore = metaScore;
     }
 
-    public int getImdbRating() {
+    public double getImdbRating() {
         return imdbRating;
     }
 
-    public void setImdbRating(int imdbRating) {
+    public void setImdbRating(double imdbRating) {
         this.imdbRating = imdbRating;
     }
 
@@ -199,11 +196,11 @@ public class Movie {
         this.imdbVotes = imdbVotes;
     }
 
-    public List<Rating> getUserRating() {
+    public double getUserRating() {
         return userRating;
     }
 
-    public void setUserRating(List<Rating> userRating) {
+    public void setUserRating(double userRating) {
         this.userRating = userRating;
     }
 

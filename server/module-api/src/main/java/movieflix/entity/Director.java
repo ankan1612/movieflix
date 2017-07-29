@@ -39,14 +39,5 @@ public class Director {
     private  String directorId;
     @NotNull
     private String name;
-    @ManyToMany(cascade=CascadeType.ALL, mappedBy="director")
-    private List<Movie> movie;
 
-    public List<Movie> getMovie() {
-        return movie;
-    }
-
-    public void setMovie(List<Movie> movie) {
-        this.movie = movie;
-    }
 }
