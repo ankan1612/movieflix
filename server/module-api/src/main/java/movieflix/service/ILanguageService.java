@@ -8,9 +8,10 @@ import java.util.List;
  * Created by Ankan on 7/26/2017.
  */
 public interface ILanguageService {
-    public List<Language> findAll();
-    public Language findOne(String id);
-    public  Language create(Language language);
-    public  Language update(String id, Language language);
-    public void  delete(String id);
+     List<Language> findAll();
+     Language findOne(String id);
+    Language findByName(String name);
+    Language create(Language language);
+      Language update(String id, Language language);
+     void  delete(String id);
 }

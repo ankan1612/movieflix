@@ -2,7 +2,6 @@ package movieflix.service;
 
 import movieflix.entity.Genre;
 import movieflix.exception.GenreAlreadyExistsException;
-import movieflix.exception.CountryNotFoundException;
 import movieflix.exception.GenreNotFoundException;
 import movieflix.repository.GenreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +28,16 @@ public class GenreService implements  IGenreService{
     public Genre findOne(String id) {
         Genre existing = repository.findOne(id);
         if(existing==null) {
-            throw new CountryNotFoundException("Genre with id: " + id + " not found");
+            throw new GenreNotFoundException("Genre with id: " + id + " not found");
+        }
+        return existing;
+    }
+
+    @Override
+    public Genre findByName(String name) {
+        Genre existing = repository.findByName(name);
+        if(existing==null) {
+            throw new GenreNotFoundException("Genre with name: " + name + " not found");
         }
         return existing;
     }

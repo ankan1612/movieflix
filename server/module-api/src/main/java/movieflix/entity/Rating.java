@@ -5,25 +5,24 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by Ankan on 7/24/2017.
  */
 @Entity
 @Table
+@NamedQueries({
+        @NamedQuery(name = "Rating.findAll", query = "SELECT r from Rating r"),
+        @NamedQuery(name = "Rating.findByMovie", query = "SELECT r from Rating r where r.id.movie=:pName"),
+        @NamedQuery(name = "Rating.deleteByMovie", query = "delete from Rating r where rid.movie=:pName"),
+        @NamedQuery(name = "Rating.deleteByUser", query = "delete from Rating r where r.id.user=:pName"),
+        @NamedQuery(name = "Rating.findByUser", query = "SELECT r from Rating r where r.id.user=:pName"),
+        @NamedQuery(name = "Rating.getAverageByMovie", query = "SELECT avg(r.rating) from Rating r where r.id.movie=:pName group by r.id.movie")
+})
 public class Rating {
-    @Id
-    @GenericGenerator(name="customUUID", strategy="uuid2")
-    @GeneratedValue(generator = "customUUID")
-    private  String ratingId;
-    @NotNull
-    @ManyToOne(cascade=CascadeType.ALL)
-    @JoinTable(name="Rating_Movie", joinColumns=@JoinColumn(name="ratingID"), inverseJoinColumns=@JoinColumn(name="imdbId"))
-    private Movie movie;
-    @NotNull
-    @OneToOne
-    private User user;
+
+    @EmbeddedId
+    private RatingId id;
     @NotNull
     private  int ratingScore;
     private  String comments;
@@ -31,28 +30,22 @@ public class Rating {
     @Temporal(TemporalType.TIMESTAMP)
     private Date timeStamp;
 
-    public String getRatingId() {
-        return ratingId;
+    @PrePersist
+    protected void onCreate() {
+        timeStamp = new Date();
     }
 
-    public void setRatingId(String ratingId) {
-        this.ratingId = ratingId;
+    @PreUpdate
+    protected void onUpdate() {
+        timeStamp = new Date();
     }
 
-    public Movie getMovie() {
-        return movie;
+    public RatingId getId() {
+        return id;
     }
 
-    public void setMovie(Movie movie) {
-        this.movie = movie;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
+    public void setId(RatingId id) {
+        this.id = id;
     }
 
     public int getRatingScore() {
@@ -73,9 +66,5 @@ public class Rating {
 
     public Date getTimeStamp() {
         return timeStamp;
-    }
-
-    public void setTimeStamp(Date timeStamp) {
-        this.timeStamp = timeStamp;
     }
 }

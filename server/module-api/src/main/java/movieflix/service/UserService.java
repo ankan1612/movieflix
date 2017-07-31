@@ -19,6 +19,9 @@ public class UserService implements IUserService {
     @Autowired
     UserRepository repository;
 
+    @Autowired
+    RatingService ratingService;
+
     @Override
     public List<User> findAll() {
         return repository.findAll();
@@ -29,6 +32,15 @@ public class UserService implements IUserService {
         User existing = repository.findOne(id);
         if(existing==null) {
             throw new UserNotFoundException("User with id: " + id + " not found");
+        }
+        return existing;
+    }
+
+    @Override
+    public List<User> findByRole(String role) {
+        List<User> existing = repository.findByRole(role);
+        if(existing==null) {
+            throw new UserNotFoundException("User with role: " + role + " not found");
         }
         return existing;
     }
@@ -63,6 +75,8 @@ public class UserService implements IUserService {
         {
             throw new UserNotFoundException("User with id: " + id + " not found");
         }
-        repository.delete(existing);
+        if(ratingService.deleteByUser(existing)) {
+            repository.delete(existing);
+        }
     }
 }

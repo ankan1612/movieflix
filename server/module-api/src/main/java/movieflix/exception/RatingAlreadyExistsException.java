@@ -4,20 +4,19 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
- * Created by Ankan on 7/24/2017.
+ * Created by Ankan on 7/26/2017.
  */
 
-@ResponseStatus(code= HttpStatus.NOT_FOUND)
-public class UserNotFoundException extends RuntimeException
-{
+@ResponseStatus(code= HttpStatus.BAD_REQUEST)
+public class RatingAlreadyExistsException extends RuntimeException {
+
     private static final long serialVersionUID = 405802649322364762L;
 
-    public UserNotFoundException(String message)
-    {
+    public RatingAlreadyExistsException(String message) {
         super(message);
     }
-    public UserNotFoundException(String message, Throwable cause)
-    {
+
+    public RatingAlreadyExistsException(String message, Throwable cause) {
         super(message, cause);
     }
 }

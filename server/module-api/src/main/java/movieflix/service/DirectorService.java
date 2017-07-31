@@ -1,6 +1,9 @@
 package movieflix.service;
 
 import movieflix.entity.Director;
+import movieflix.exception.ActorAlreadyExistsException;
+import movieflix.exception.ActorNotFoundException;
+import movieflix.exception.DirectorAlreadyExistsException;
 import movieflix.exception.DirectorNotFoundException;
 import movieflix.repository.DirectorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,8 +36,22 @@ public class DirectorService implements IDirectorService {
     }
 
     @Override
+    public List<Director> findByName(String name) {
+        List<Director> existing = repository.findbyName(name);
+        if(existing==null) {
+            throw new DirectorNotFoundException("Director with name: " + name + " not found");
+        }
+        return existing;
+    }
+
+    @Override
     @Transactional
     public Director create(Director director) {
+        Director existing = repository.findOne(director.getDirectorId());
+        if(existing!=null)
+        {
+            throw new DirectorAlreadyExistsException("Director is already in use: " + director.getDirectorId() + " " + director.getName());
+        }
         return repository.create(director);
     }
 

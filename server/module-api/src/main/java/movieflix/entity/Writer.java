@@ -4,8 +4,6 @@ import com.sun.istack.internal.NotNull;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Ankan on 7/23/2017.
@@ -13,16 +11,17 @@ import java.util.List;
 @Entity
 @Table
 @NamedQueries({
-        @NamedQuery(name = "Director.findAll", query = "SELECT w from  Writer w ORDER BY w.writerId ASC")
+        @NamedQuery(name = "Writer.findAll", query = "SELECT w from  Writer w ORDER BY w.writerId ASC"),
+        @NamedQuery(name = "Writer.findByName", query = "SELECT w from Writer w WHERE w.name=:pName")
 })
 public class Writer {
 
     public String getWriterId() {
-        return writerId;
+        return imdbwriterId;
     }
 
-    public void setWriterId(String writerId) {
-        this.writerId = writerId;
+    public void setWriterId(String imdbwriterId) {
+        this.imdbwriterId = imdbwriterId;
     }
 
     public String getName() {
@@ -36,7 +35,7 @@ public class Writer {
     @Id
     @GenericGenerator(name="customUUID", strategy="uuid2")
     @GeneratedValue(generator = "customUUID")
-    private  String writerId;
+    private  String imdbwriterId;
     @NotNull
     private String name;
 

@@ -1,11 +1,8 @@
 package movieflix.entity;
 
 import com.sun.istack.internal.NotNull;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Ankan on 7/23/2017.
@@ -13,16 +10,17 @@ import java.util.List;
 @Entity
 @Table
 @NamedQueries({
-        @NamedQuery(name = "Director.findAll", query = "SELECT d from  Director d ORDER BY d.directorId ASC")
+        @NamedQuery(name = "Director.findAll", query = "SELECT d from  Director d ORDER BY d.directorId ASC"),
+        @NamedQuery(name = "Director.findByName", query = "SELECT d from  Director  d where d.name=:pName")
 })
 public class Director {
 
     public String getDirectorId() {
-        return directorId;
+        return imdbdirectorId;
     }
 
-    public void setDirectorId(String directorId) {
-        this.directorId = directorId;
+    public void setDirectorId(String imdbdirectorId) {
+        this.imdbdirectorId = imdbdirectorId;
     }
 
     public String getName() {
@@ -34,9 +32,7 @@ public class Director {
     }
 
     @Id
-    @GenericGenerator(name="customUUID", strategy="uuid2")
-    @GeneratedValue(generator = "customUUID")
-    private  String directorId;
+    private  String imdbdirectorId;
     @NotNull
     private String name;
 

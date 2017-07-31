@@ -11,7 +11,8 @@ import java.util.*;
 @Entity
 @Table
 @NamedQueries({
-        @NamedQuery(name = "Movie.findAll", query = "SELECT m from  Movie  m ORDER BY m.imdbId ASC")
+        @NamedQuery(name = "Movie.findAll", query = "SELECT m from  Movie  m ORDER BY m.imdbId ASC"),
+        @NamedQuery(name = "Movie.findByTitle", query = "SELECT m from  Movie  m where m.title=:pName")
 })
 public class Movie {
     @Id
@@ -23,33 +24,29 @@ public class Movie {
     @Temporal(TemporalType.DATE)
     private Date released;
     private String runtime;
-    @ManyToMany(cascade=CascadeType.ALL)
-    @JoinTable(name="Movie_Genre", joinColumns=@JoinColumn(name="imdbId"), inverseJoinColumns=@JoinColumn(name="genreID"))
-    private List<Genre> genre;
-    @ManyToMany(cascade=CascadeType.ALL)
-    @JoinTable(name="Movie_Director", joinColumns=@JoinColumn(name="imdbId"), inverseJoinColumns=@JoinColumn(name="directorID"))
-    private List<Director> director;
-    @ManyToMany(cascade=CascadeType.ALL)
-    @JoinTable(name="Movie_Writer", joinColumns=@JoinColumn(name="imdbId"), inverseJoinColumns=@JoinColumn(name="writerID"))
-    private List<Writer> writer;
-    @ManyToMany(cascade=CascadeType.ALL)
-    @JoinTable(name="Movie_Actor", joinColumns=@JoinColumn(name="imdbId"), inverseJoinColumns=@JoinColumn(name="actorID"))
-    private List<Actor> actor;
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY, targetEntity = Genre.class)
+    private Set<Genre> genre;
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY, targetEntity = Director.class)
+    private Set<Director> director;
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY, targetEntity = Writer.class)
+    private Set<Writer> writer;
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY, targetEntity = Actor.class)
+    private Set<Actor> actor;
     private String plot;
-    @ManyToMany(cascade=CascadeType.ALL)
-    @JoinTable(name="Movie_Language", joinColumns=@JoinColumn(name="imdbId"), inverseJoinColumns=@JoinColumn(name="langID"))
-    private List<Language> language;
-    @ManyToMany(cascade=CascadeType.ALL)
-    @JoinTable(name="Movie_Country", joinColumns=@JoinColumn(name="imdbId"), inverseJoinColumns=@JoinColumn(name="countryID"))
-    private List<Country> country;
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY, targetEntity = Language.class)
+    private Set<Language> language;
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY, targetEntity = Country.class)
+    private Set<Country> country;
     private String awards;
     private String poster;
     private int metaScore;
+    @Column(columnDefinition="Decimal(3,1) default '0.0'")
     private double imdbRating;
     private int imdbVotes;
+    @Column(columnDefinition="Decimal(3,1) default '0.0'")
     private double userRating;
-    @ManyToOne(cascade=CascadeType.ALL)
-    @JoinTable(name="Movie_Type", joinColumns=@JoinColumn(name="imdbId"), inverseJoinColumns=@JoinColumn(name="typeID"))
+    @NotNull
+    @OneToOne(cascade=CascadeType.ALL, fetch = FetchType.LAZY)
     private Type type;
 
     public String getImdbId() {
@@ -100,35 +97,35 @@ public class Movie {
         this.runtime = runtime;
     }
 
-    public List<Genre> getGenre() {
+    public Set<Genre> getGenre() {
         return genre;
     }
 
-    public void setGenre(List<Genre> genre) {
+    public void setGenre(Set<Genre> genre) {
         this.genre = genre;
     }
 
-    public List<Director> getDirector() {
+    public Set<Director> getDirector() {
         return director;
     }
 
-    public void setDirector(List<Director> director) {
+    public void setDirector(Set<Director> director) {
         this.director = director;
     }
 
-    public List<Writer> getWriter() {
+    public Set<Writer> getWriter() {
         return writer;
     }
 
-    public void setWriter(List<Writer> writer) {
+    public void setWriter(Set<Writer> writer) {
         this.writer = writer;
     }
 
-    public List<Actor> getActor() {
+    public Set<Actor> getActor() {
         return actor;
     }
 
-    public void setActor(List<Actor> actor) {
+    public void setActor(Set<Actor> actor) {
         this.actor = actor;
     }
 
@@ -140,19 +137,19 @@ public class Movie {
         this.plot = plot;
     }
 
-    public List<Language> getLanguage() {
+    public Set<Language> getLanguage() {
         return language;
     }
 
-    public void setLanguage(List<Language> language) {
+    public void setLanguage(Set<Language> language) {
         this.language = language;
     }
 
-    public List<Country> getCountry() {
+    public Set<Country> getCountry() {
         return country;
     }
 
-    public void setCountry(List<Country> country) {
+    public void setCountry(Set<Country> country) {
         this.country = country;
     }
 

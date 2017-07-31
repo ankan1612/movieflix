@@ -11,6 +11,7 @@ public interface IUserRepository {
     public List<User> findAll();
     public  User findOne(String id);
     public  User findByEmail(String email);
+    public List<User> findByRole(String role);
     public  User create(User emp);
     public  User update(User emp);
     public void  delete(User emp);

@@ -8,9 +8,10 @@ import java.util.List;
  * Created by Ankan on 7/24/2017.
  */
 public interface IUserService {
-    public List<User> findAll();
-    public User findOne(String id);
-    public  User create(User user);
-    public  User update(String id, User user);
-    public void  delete(String id);
+     List<User> findAll();
+     User findOne(String id);
+    List<User> findByRole(String role);
+    User create(User user);
+      User update(String id, User user);
+     void  delete(String id);
 }

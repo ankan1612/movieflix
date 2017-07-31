@@ -10,6 +10,7 @@ import java.util.List;
 public interface IDirectorRepository {
     public List<Director> findAll();
     public Director findOne(String id);
+    public List<Director> findbyName(String name);
     public  Director create(Director director);
     public  Director update(Director director);
     public void  delete(Director director);

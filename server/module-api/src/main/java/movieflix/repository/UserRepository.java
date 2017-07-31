@@ -41,6 +41,13 @@ public class UserRepository implements IUserRepository{
     }
 
     @Override
+    public List<User> findByRole(String role) {
+        TypedQuery<User> query = em.createNamedQuery("User.findByRole",User.class);
+        query.setParameter("pRole",role);
+        return query.getResultList();
+    }
+
+    @Override
     public User create(User user) {
         em.persist(user);
         return user;

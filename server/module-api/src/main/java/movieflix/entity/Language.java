@@ -4,8 +4,6 @@ import com.sun.istack.internal.NotNull;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Ankan on 7/23/2017.

@@ -8,9 +8,10 @@ import java.util.List;
  * Created by Ankan on 7/25/2017.
  */
 public interface IMovieService {
-    public List<Movie> findAll();
-    public Movie findOne(String id);
-    public  Movie create(Movie movie);
-    public  Movie update(String id, Movie movie);
-    public void  delete(String id);
+     List<Movie> findAll();
+     Movie findOne(String id);
+    List<Movie> findbyTitle(String name);
+    Movie create(Movie movie);
+      Movie update(String id, Movie movie);
+     void  delete(String id);
 }

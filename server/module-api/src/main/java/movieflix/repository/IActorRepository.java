@@ -10,6 +10,7 @@ import java.util.List;
 public interface IActorRepository {
     public List<Actor> findAll();
     public Actor findOne(String id);
+    public List<Actor> findbyName(String name);
     public  Actor create(Actor actor);
     public  Actor update(Actor actor);
     public void  delete(Actor actor);

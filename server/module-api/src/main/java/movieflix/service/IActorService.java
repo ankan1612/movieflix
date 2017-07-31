@@ -8,9 +8,10 @@ import java.util.List;
  * Created by Ankan on 7/25/2017.
  */
 public interface IActorService {
-    public List<Actor> findAll();
-    public Actor findOne(String id);
-    public  Actor create(Actor actor);
-    public  Actor update(String id, Actor actor);
-    public void  delete(String id);
+     List<Actor> findAll();
+     Actor findOne(String id);
+     List<Actor> findByName(String name);
+      Actor create(Actor actor);
+      Actor update(String id, Actor actor);
+     void  delete(String id);
 }

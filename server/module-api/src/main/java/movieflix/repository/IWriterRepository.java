@@ -10,6 +10,7 @@ import java.util.List;
 public interface IWriterRepository {
     public List<Writer> findAll();
     public Writer findOne(String id);
+    public List<Writer> findbyName(String name);
     public  Writer create(Writer writer);
     public  Writer update(Writer writer);
     public void  delete(Writer writer);

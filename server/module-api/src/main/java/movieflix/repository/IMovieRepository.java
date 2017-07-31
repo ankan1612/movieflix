@@ -10,6 +10,7 @@ import java.util.List;
 public interface IMovieRepository {
     public List<Movie> findAll();
     public  Movie findOne(String id);
+    public List<Movie> findbyTitle(String name);
     public  Movie create(Movie movie);
     public  Movie update(Movie movie);
     public void  delete(Movie movie);

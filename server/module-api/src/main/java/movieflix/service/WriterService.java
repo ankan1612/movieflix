@@ -1,6 +1,7 @@
 package movieflix.service;
 
 import movieflix.entity.Writer;
+import movieflix.exception.WriterAlreadyExistsException;
 import movieflix.exception.WriterNotFoundException;
 import movieflix.repository.WriterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,8 +34,22 @@ public class WriterService implements IWriterService {
     }
 
     @Override
+    public List<Writer> findByName(String name) {
+        List<Writer> existing = repository.findbyName(name);
+        if(existing==null) {
+            throw new WriterNotFoundException("Writer with name: " + name + " not found");
+        }
+        return existing;
+    }
+
+    @Override
     @Transactional
     public Writer create(Writer writer) {
+        Writer existing = repository.findOne(writer.getWriterId());
+        if(existing!=null)
+        {
+            throw new WriterAlreadyExistsException("Writer is already in use: " + writer.getWriterId() + " " + writer.getName());
+        }
         return repository.create(writer);
     }
 

@@ -12,7 +12,8 @@ import javax.persistence.*;
 @Table
 @NamedQueries({
         @NamedQuery(name = "User.findAll", query = "SELECT u from  User  u ORDER BY u.email ASC"),
-        @NamedQuery(name = "User.findByEmail", query = "SELECT u from User u WHERE u.email=:pEmail")
+        @NamedQuery(name = "User.findByEmail", query = "SELECT u from User u WHERE u.email=:pEmail"),
+        @NamedQuery(name = "User.findByRole", query = "SELECT u from User u WHERE u.role=:pRole")
 })
 public class User {
     public String getUserId() {

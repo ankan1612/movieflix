@@ -29,6 +29,13 @@ public class MovieRepository implements IMovieRepository {
     }
 
     @Override
+    public List<Movie> findbyTitle(String name) {
+        TypedQuery<Movie> query = em.createNamedQuery("Movie.findByTitle",Movie.class);
+        query.setParameter("pName",name);
+        return  query.getResultList();
+    }
+
+    @Override
     public Movie create(Movie movie) {
         em.persist(movie);
         return movie;

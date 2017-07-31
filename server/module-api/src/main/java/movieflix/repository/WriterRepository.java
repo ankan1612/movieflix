@@ -29,6 +29,13 @@ public class WriterRepository implements IWriterRepository {
     }
 
     @Override
+    public List<Writer> findbyName(String name) {
+        TypedQuery<Writer> query = em.createNamedQuery("Writer.findByName",Writer.class);
+        query.setParameter("pName",name);
+        return  query.getResultList();
+    }
+
+    @Override
     public Writer create(Writer writer) {
         em.persist(writer);
         return writer;

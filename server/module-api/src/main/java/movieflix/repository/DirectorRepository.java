@@ -1,5 +1,6 @@
 package movieflix.repository;
 
+import movieflix.entity.Actor;
 import movieflix.entity.Director;
 import org.springframework.stereotype.Repository;
 
@@ -26,6 +27,13 @@ public class DirectorRepository implements IDirectorRepository {
     @Override
     public Director findOne(String id) {
         return em.find(Director.class, id);
+    }
+
+    @Override
+    public List<Director> findbyName(String name) {
+        TypedQuery<Director> query = em.createNamedQuery("Director.findByName",Director.class);
+        query.setParameter("pName",name);
+        return  query.getResultList();
     }
 
     @Override

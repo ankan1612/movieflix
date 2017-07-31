@@ -1,11 +1,8 @@
 package movieflix.entity;
 
 import com.sun.istack.internal.NotNull;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Ankan on 7/23/2017.
@@ -13,22 +10,21 @@ import java.util.List;
 @Entity
 @Table
 @NamedQueries({
-        @NamedQuery(name = "Actor.findAll", query = "SELECT a from  Actor  a ORDER BY a.actorId ASC")
+        @NamedQuery(name = "Actor.findAll", query = "SELECT a from  Actor  a ORDER BY a.imdbactorId ASC"),
+        @NamedQuery(name = "Actor.findByName", query = "SELECT a from  Actor  a where a.name=:pName")
 })
 public class Actor {
     @Id
-    @GenericGenerator(name="customUUID", strategy="uuid2")
-    @GeneratedValue(generator = "customUUID")
-    private  String actorId;
+    private  String imdbactorId;
     @NotNull
     private String name;
 
     public String getActorId() {
-        return actorId;
+        return imdbactorId;
     }
 
-    public void setActorId(String actorId) {
-        this.actorId = actorId;
+    public void setActorId(String imdbactorId) {
+        this.imdbactorId = imdbactorId;
     }
 
     public String getName() {

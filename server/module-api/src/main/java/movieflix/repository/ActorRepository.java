@@ -29,6 +29,13 @@ public class ActorRepository implements IActorRepository {
     }
 
     @Override
+    public List<Actor> findbyName(String name) {
+        TypedQuery<Actor> query = em.createNamedQuery("Actor.findByName",Actor.class);
+        query.setParameter("pName",name);
+        return  query.getResultList();
+    }
+
+    @Override
     public Actor create(Actor actor) {
         em.persist(actor);
         return actor;

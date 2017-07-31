@@ -8,9 +8,10 @@ import java.util.List;
  * Created by Ankan on 7/26/2017.
  */
 public interface IGenreService {
-    public List<Genre> findAll();
-    public Genre findOne(String id);
-    public  Genre create(Genre genre);
-    public  Genre update(String id, Genre genre);
-    public void  delete(String id);
+    List<Genre> findAll();
+    Genre findOne(String id);
+    Genre findByName(String name);
+    Genre create(Genre genre);
+    Genre update(String id, Genre genre);
+    void  delete(String id);
 }

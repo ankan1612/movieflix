@@ -5,8 +5,6 @@ import com.sun.org.apache.xpath.internal.operations.String;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Ankan on 7/27/2017.
@@ -14,8 +12,8 @@ import java.util.List;
 @Entity
 @Table
 @NamedQueries({
-        @NamedQuery(name = "Year.findAll", query = "SELECT t from  Type  t ORDER BY t.typeId ASC"),
-        @NamedQuery(name = "User.findByType", query = "SELECT t from Type t WHERE t.type=:pType")
+        @NamedQuery(name = "Type.findAll", query = "SELECT t from  Type  t ORDER BY t.typeId ASC"),
+        @NamedQuery(name = "Type.findByName", query = "SELECT t from Type t WHERE t.name=:pName")
 })
 public class Type {
 
@@ -24,7 +22,7 @@ public class Type {
     @GeneratedValue(generator = "customUUID")
     private  String typeId;
     @NotNull
-    private String type;
+    private String name;
 
     public String getTypeId() {
         return typeId;
@@ -34,11 +32,11 @@ public class Type {
         this.typeId = typeId;
     }
 
-    public String getType() {
-        return type;
+    public String getName() {
+        return name;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setName(String name) {
+        this.name = name;
     }
 }

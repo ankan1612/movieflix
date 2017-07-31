@@ -35,6 +35,15 @@ public class LanguageService implements  ILanguageService{
     }
 
     @Override
+    public Language findByName(String name) {
+        Language existing = repository.findByName(name);
+        if(existing==null) {
+            throw new LanguageNotFoundException("Language with name: " + name + " not found");
+        }
+        return existing;
+    }
+
+    @Override
     @Transactional
     public Language create(Language language) {
         Language existing = repository.findByName(language.getName());
