@@ -48,4 +48,5 @@ public class RatingId implements Serializable {
     public int hashCode() {
         return Objects.hash(getMovie(), getUser());
     }
+
 }

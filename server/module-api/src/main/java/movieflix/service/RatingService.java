@@ -7,7 +7,7 @@ import movieflix.entity.RatingId;
 import movieflix.entity.User;
 import movieflix.exception.RatingAlreadyExistsException;
 import movieflix.exception.RatingNotFoundException;
-import movieflix.repository.RatingRepository;
+import movieflix.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,13 +21,13 @@ import java.util.List;
 public class RatingService implements IRatingService {
 
     @Autowired
-    RatingRepository repository;
+    IRatingRepository repository;
 
     @Autowired
-    MovieService movieService;
+    IMovieRepository movieRepository;
 
     @Autowired
-    UserService userService;
+    IUserRepository userRepository;
 
     @Override
     public RatingId getRatingId(String id) {
@@ -36,8 +36,8 @@ public class RatingService implements IRatingService {
         {
             throw new RatingNotFoundException("Rating with id: " + id  +" not found");
         }
-        Movie m = movieService.findOne(ids[0]);
-        User u = userService.findOne(ids[1]);
+        Movie m = movieRepository.findOne(ids[0]);
+        User u = userRepository.findOne(ids[1]);
         if(m==null && u==null)
         {
             throw new RatingNotFoundException("Rating with movie: " + ids[0] + "and user: "+ ids[1]  +" not found");
@@ -63,7 +63,7 @@ public class RatingService implements IRatingService {
     @Override
     public List<Rating> findByMovie(Movie movie) {
         List<Rating> existing = repository.findByMovie(movie);
-        if(existing==null) {
+        if(existing.size()<1) {
             throw new RatingNotFoundException("Rating with movie: " + movie.getTitle() +" not found");
         }
         return existing;
@@ -72,7 +72,7 @@ public class RatingService implements IRatingService {
     @Override
     public List<Rating> findByUser(User user) {
         List<Rating> existing = repository.findByUser(user);
-        if(existing==null) {
+        if(existing.size()<1) {
             throw new RatingNotFoundException("Rating with user: " + user.getEmail() +" not found");
         }
         return existing;
@@ -81,7 +81,7 @@ public class RatingService implements IRatingService {
     @Override
     public List<Double> getAverageByMovie(Movie movie) {
         List<Double> existing = repository.getAverageByMovie(movie);
-        if(existing==null) {
+        if(existing.size()<1) {
             throw new RatingNotFoundException("Rating with movie: " + movie.getTitle() +" not found");
         }
         return existing;
@@ -109,7 +109,7 @@ public class RatingService implements IRatingService {
         }
         return repository.update(rating);
     }
-
+    @Transactional
     @Override
     public void delete(String id) {
         RatingId ratingId = getRatingId(id);
@@ -120,11 +120,11 @@ public class RatingService implements IRatingService {
         }
         repository.delete(existing);
     }
-
+    @Transactional
     @Override
     public boolean deleteByMovie(Movie movie) {
         List<Rating> existing = repository.findByMovie(movie);
-        if(existing==null) {
+        if(existing.size()==0) {
             return true;
         }
         if(repository.deleteByMovie(movie)>0)
@@ -133,11 +133,11 @@ public class RatingService implements IRatingService {
         }
         return false;
     }
-
+    @Transactional
     @Override
     public boolean deleteByUser(User user) {
         List<Rating> existing = repository.findByUser(user);
-        if(existing==null) {
+        if(existing.size()==0) {
             return true;
         }
         if(repository.deleteByUser(user)>0)

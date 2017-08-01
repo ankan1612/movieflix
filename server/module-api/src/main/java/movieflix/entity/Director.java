@@ -10,17 +10,22 @@ import javax.persistence.*;
 @Entity
 @Table
 @NamedQueries({
-        @NamedQuery(name = "Director.findAll", query = "SELECT d from  Director d ORDER BY d.directorId ASC"),
-        @NamedQuery(name = "Director.findByName", query = "SELECT d from  Director  d where d.name=:pName")
+        @NamedQuery(name = "Director.findAll", query = "SELECT a from  Director  a ORDER BY a.directorId ASC"),
+        @NamedQuery(name = "Director.findByName", query = "SELECT a from  Director  a where a.name=:pName")
 })
 public class Director {
 
+    @Id
+    private  String directorId;
+    @NotNull
+    private String name;
+
     public String getDirectorId() {
-        return imdbdirectorId;
+        return directorId;
     }
 
-    public void setDirectorId(String imdbdirectorId) {
-        this.imdbdirectorId = imdbdirectorId;
+    public void setDirectorId(String directorId) {
+        this.directorId = directorId;
     }
 
     public String getName() {
@@ -30,10 +35,4 @@ public class Director {
     public void setName(String name) {
         this.name = name;
     }
-
-    @Id
-    private  String imdbdirectorId;
-    @NotNull
-    private String name;
-
 }

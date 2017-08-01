@@ -3,8 +3,7 @@ package movieflix.service;
 import movieflix.entity.Actor;
 import movieflix.exception.ActorAlreadyExistsException;
 import movieflix.exception.ActorNotFoundException;
-import movieflix.exception.UserAlreadyExistsException;
-import movieflix.repository.ActorRepository;
+import movieflix.repository.IActorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +17,7 @@ import java.util.List;
 public class ActorService implements IActorService {
 
     @Autowired
-    ActorRepository repository;
+    IActorRepository repository;
 
     @Override
     public List<Actor> findAll() {

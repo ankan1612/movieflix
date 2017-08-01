@@ -1,11 +1,9 @@
 package movieflix.service;
 
 import movieflix.entity.Movie;
-import movieflix.entity.Rating;
 import movieflix.exception.MovieAlreadyExistsException;
 import movieflix.exception.MovieNotFoundException;
-import movieflix.repository.MovieRepository;
-import movieflix.repository.RatingRepository;
+import movieflix.repository.IMovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,10 +17,10 @@ import java.util.List;
 public class MovieService implements IMovieService {
 
     @Autowired
-    MovieRepository repository;
+    IMovieRepository repository;
 
     @Autowired
-    RatingService ratingService;
+    IRatingService ratingService;
 
     @Override
     public List<Movie> findAll() {

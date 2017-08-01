@@ -4,7 +4,7 @@ import movieflix.entity.Language;
 import movieflix.exception.CountryNotFoundException;
 import movieflix.exception.LanguageAlreadyExistsException;
 import movieflix.exception.LanguageNotFoundException;
-import movieflix.repository.LanguageRepository;
+import movieflix.repository.ILanguageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +18,7 @@ import java.util.List;
 public class LanguageService implements  ILanguageService{
 
     @Autowired
-    LanguageRepository repository;
+    ILanguageRepository repository;
 
     @Override
     public List<Language> findAll() {

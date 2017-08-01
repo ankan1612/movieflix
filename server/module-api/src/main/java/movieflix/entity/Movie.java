@@ -24,18 +24,18 @@ public class Movie {
     @Temporal(TemporalType.DATE)
     private Date released;
     private String runtime;
-    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY, targetEntity = Genre.class)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = Genre.class)
     private Set<Genre> genre;
-    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY, targetEntity = Director.class)
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER, targetEntity = Director.class)
     private Set<Director> director;
-    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY, targetEntity = Writer.class)
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER, targetEntity = Writer.class)
     private Set<Writer> writer;
-    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY, targetEntity = Actor.class)
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER, targetEntity = Actor.class)
     private Set<Actor> actor;
     private String plot;
-    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY, targetEntity = Language.class)
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER, targetEntity = Language.class)
     private Set<Language> language;
-    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY, targetEntity = Country.class)
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER, targetEntity = Country.class)
     private Set<Country> country;
     private String awards;
     private String poster;
@@ -46,7 +46,7 @@ public class Movie {
     @Column(columnDefinition="Decimal(3,1) default '0.0'")
     private double userRating;
     @NotNull
-    @OneToOne(cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
     private Type type;
 
     public String getImdbId() {
@@ -208,4 +208,5 @@ public class Movie {
     public void setType(Type type) {
         this.type = type;
     }
+
 }

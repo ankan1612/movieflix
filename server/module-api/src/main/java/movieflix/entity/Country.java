@@ -38,6 +38,5 @@ public class Country {
     private  String countryId;
     @NotNull
     private String name;
-
 }
 

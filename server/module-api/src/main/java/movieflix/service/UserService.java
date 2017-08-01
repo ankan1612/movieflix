@@ -3,7 +3,7 @@ package movieflix.service;
 import movieflix.entity.User;
 import movieflix.exception.UserAlreadyExistsException;
 import movieflix.exception.UserNotFoundException;
-import movieflix.repository.UserRepository;
+import movieflix.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,10 +17,10 @@ import java.util.List;
 public class UserService implements IUserService {
 
     @Autowired
-    UserRepository repository;
+    IUserRepository repository;
 
     @Autowired
-    RatingService ratingService;
+    IRatingService ratingService;
 
     @Override
     public List<User> findAll() {

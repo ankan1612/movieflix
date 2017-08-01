@@ -1,7 +1,6 @@
 package movieflix.entity;
 
 import com.sun.istack.internal.NotNull;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
@@ -17,11 +16,11 @@ import javax.persistence.*;
 public class Writer {
 
     public String getWriterId() {
-        return imdbwriterId;
+        return writerId;
     }
 
-    public void setWriterId(String imdbwriterId) {
-        this.imdbwriterId = imdbwriterId;
+    public void setWriterId(String writerId) {
+        this.writerId = writerId;
     }
 
     public String getName() {
@@ -33,9 +32,7 @@ public class Writer {
     }
 
     @Id
-    @GenericGenerator(name="customUUID", strategy="uuid2")
-    @GeneratedValue(generator = "customUUID")
-    private  String imdbwriterId;
+    private  String writerId;
     @NotNull
     private String name;
 

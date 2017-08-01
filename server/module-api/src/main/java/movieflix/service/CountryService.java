@@ -2,7 +2,7 @@ package movieflix.service;
 
 import movieflix.entity.Country;
 import movieflix.exception.*;
-import movieflix.repository.CountryRepository;
+import movieflix.repository.ICountryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,7 +16,7 @@ import java.util.List;
 public class CountryService implements  ICountryService{
 
     @Autowired
-    CountryRepository repository;
+    ICountryRepository repository;
 
     @Override
     public List<Country> findAll() {

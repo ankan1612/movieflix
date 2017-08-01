@@ -1,11 +1,9 @@
 package movieflix.service;
 
 import movieflix.entity.Director;
-import movieflix.exception.ActorAlreadyExistsException;
-import movieflix.exception.ActorNotFoundException;
 import movieflix.exception.DirectorAlreadyExistsException;
 import movieflix.exception.DirectorNotFoundException;
-import movieflix.repository.DirectorRepository;
+import movieflix.repository.IDirectorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,7 +17,7 @@ import java.util.List;
 public class DirectorService implements IDirectorService {
 
     @Autowired
-    DirectorRepository repository;
+    IDirectorRepository repository;
 
     @Override
     public List<Director> findAll() {

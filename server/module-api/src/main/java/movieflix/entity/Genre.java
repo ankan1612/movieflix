@@ -11,8 +11,8 @@ import javax.persistence.*;
 @Entity
 @Table
 @NamedQueries({
-        @NamedQuery(name = "Genre.findAll", query = "SELECT g from  Genre  g ORDER BY c.genreId ASC"),
-        @NamedQuery(name = "Genre.findByName", query = "SELECT g from Genre  g WHERE c.name=:pName")
+        @NamedQuery(name = "Genre.findAll", query = "SELECT g from  Genre  g ORDER BY g.genreId ASC"),
+        @NamedQuery(name = "Genre.findByName", query = "SELECT g from Genre  g WHERE g.name=:pName")
 })
 public class Genre {
 

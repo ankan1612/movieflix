@@ -1,7 +1,7 @@
 package movieflix.controller;
 
 import movieflix.entity.Movie;
-import movieflix.service.MovieService;
+import movieflix.service.IMovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +16,7 @@ import java.util.List;
 public class MovieController {
 
     @Autowired
-    MovieService service;
+    IMovieService service;
 
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public List<Movie> findAll()

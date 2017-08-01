@@ -1,7 +1,6 @@
 package movieflix.entity;
 
 import com.sun.istack.internal.NotNull;
-import com.sun.org.apache.xpath.internal.operations.String;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -39,4 +38,5 @@ public class Type {
     public void setName(String name) {
         this.name = name;
     }
+
 }

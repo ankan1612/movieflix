@@ -1,7 +1,7 @@
 package movieflix.controller;
 
 import movieflix.entity.User;
-import movieflix.service.UserService;
+import movieflix.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +16,7 @@ import java.util.List;
 public class UserController {
 
     @Autowired
-    UserService service;
+    IUserService service;
 
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public List<User> findAll()

@@ -3,7 +3,7 @@ package movieflix.service;
 import movieflix.entity.Genre;
 import movieflix.exception.GenreAlreadyExistsException;
 import movieflix.exception.GenreNotFoundException;
-import movieflix.repository.GenreRepository;
+import movieflix.repository.IGenreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,7 +17,7 @@ import java.util.List;
 public class GenreService implements  IGenreService{
 
     @Autowired
-    GenreRepository repository;
+    IGenreRepository repository;
 
     @Override
     public List<Genre> findAll() {

@@ -65,9 +65,9 @@ public class User {
     }
 
     @Id
-    @GenericGenerator(name="customUUID", strategy="uuid2")
+    @GenericGenerator(name = "customUUID", strategy = "uuid2")
     @GeneratedValue(generator = "customUUID")
-    private  String userId;
+    private String userId;
     @NotNull
     private String firstName;
     @NotNull
@@ -79,4 +79,5 @@ public class User {
     private String password;
     @NotNull
     private String role;
+
 }

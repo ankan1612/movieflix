@@ -3,7 +3,7 @@ package movieflix.service;
 import movieflix.entity.Writer;
 import movieflix.exception.WriterAlreadyExistsException;
 import movieflix.exception.WriterNotFoundException;
-import movieflix.repository.WriterRepository;
+import movieflix.repository.IWriterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,7 +17,7 @@ import java.util.List;
 public class WriterService implements IWriterService {
 
     @Autowired
-    WriterRepository repository;
+    IWriterRepository repository;
 
     @Override
     public List<Writer> findAll() {

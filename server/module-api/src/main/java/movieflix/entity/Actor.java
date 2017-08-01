@@ -1,7 +1,6 @@
 package movieflix.entity;
 
 import com.sun.istack.internal.NotNull;
-
 import javax.persistence.*;
 
 /**
@@ -10,21 +9,22 @@ import javax.persistence.*;
 @Entity
 @Table
 @NamedQueries({
-        @NamedQuery(name = "Actor.findAll", query = "SELECT a from  Actor  a ORDER BY a.imdbactorId ASC"),
+        @NamedQuery(name = "Actor.findAll", query = "SELECT a from  Actor  a ORDER BY a.actorId ASC"),
         @NamedQuery(name = "Actor.findByName", query = "SELECT a from  Actor  a where a.name=:pName")
 })
 public class Actor {
+
     @Id
-    private  String imdbactorId;
+    private  String actorId;
     @NotNull
     private String name;
 
     public String getActorId() {
-        return imdbactorId;
+        return actorId;
     }
 
-    public void setActorId(String imdbactorId) {
-        this.imdbactorId = imdbactorId;
+    public void setActorId(String actorId) {
+        this.actorId = actorId;
     }
 
     public String getName() {

@@ -14,10 +14,10 @@ import java.util.Date;
 @NamedQueries({
         @NamedQuery(name = "Rating.findAll", query = "SELECT r from Rating r"),
         @NamedQuery(name = "Rating.findByMovie", query = "SELECT r from Rating r where r.id.movie=:pName"),
-        @NamedQuery(name = "Rating.deleteByMovie", query = "delete from Rating r where rid.movie=:pName"),
+        @NamedQuery(name = "Rating.deleteByMovie", query = "delete from Rating r where r.id.movie=:pName"),
         @NamedQuery(name = "Rating.deleteByUser", query = "delete from Rating r where r.id.user=:pName"),
         @NamedQuery(name = "Rating.findByUser", query = "SELECT r from Rating r where r.id.user=:pName"),
-        @NamedQuery(name = "Rating.getAverageByMovie", query = "SELECT avg(r.rating) from Rating r where r.id.movie=:pName group by r.id.movie")
+        @NamedQuery(name = "Rating.getAverageByMovie", query = "SELECT avg(r.ratingScore) from Rating r where r.id.movie=:pName group by r.id.movie")
 })
 public class Rating {
 
@@ -67,4 +67,5 @@ public class Rating {
     public Date getTimeStamp() {
         return timeStamp;
     }
+
 }
