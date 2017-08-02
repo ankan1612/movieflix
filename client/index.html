@@ -1,0 +1,161 @@
+<!doctype html>
+<html ng-app="movieflix">
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>MovieFlix</title>
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/style.css" rel="stylesheet">
+    </head>
+
+    <body>
+        <header>
+            <div ng-controller="CollapseDemoCtrl">
+                <nav class="navbar navbar-light navbar-fixed-top navbar-header" role="navigation">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle navbar-header-button" ng-click="isNavCollapsed = !isNavCollapsed">
+                                <span class="sr-only btn-danger">Toggle navigation</span>
+                                <span class="icon-bar btn-danger"></span>
+                                <span class="icon-bar btn-danger"></span>
+                                <span class="icon-bar btn-danger"></span>
+                            </button>
+                            <a class="navbar-brand navbar-header-a" href="#">
+                                <img class="img-responsive" alt="MovieFlix Logo" src="https://s3.amazonaws.com/ankan/MovieFlix.png">
+                            </a>
+                        </div>
+                        <div class="collapse navbar-collapse navbar-header-collapsepart" style="overflow: visible" uib-collapse="isNavCollapsed" >
+                            <div class="navbar-brand navbar-header-account">
+                                <div class="btn-group" uib-dropdown>
+                                    <button id="split-button" type="button" class="btn btn-danger">Ankan Kumar Giri</button>
+                                    <button type="button" class="btn btn-danger" uib-dropdown-toggle>
+                                        <span class="caret"></span>
+                                        <span class="sr-only">Split button!</span>
+                                    </button>
+                                    <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="split-button">
+                                        <li role="menuitem"><a href="#"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> My Account</a></li>
+                                        <li class="divider"></li>
+                                        <li role="menuitem"><a href="#"><span class="glyphicon glyphicon-off" aria-hidden="true"></span> Logout</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </header>
+        <content>
+            <div class="container-fluid movielist-option-container">
+                <div class="row row-centered">
+                    <div class="col-lg-4 col-centered">
+                        <div class="input-search-group">
+                            <div class="input-group">
+                                <div class="input-group-btn">
+                                    <div class="btn-group" uib-dropdown dropdown-append-to-body>
+                                        <button id="btn-append-to-body" type="button" class="btn btn-primary" uib-dropdown-toggle>
+                                            Item Selected <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-body">
+                                            <li role="menuitem"><a href="#">All</a></li>
+                                            <li class="divider"></li>
+                                            <li role="menuitem"><a href="#">Type</a></li>
+                                            <li role="menuitem"><a href="#">Genre</a></li>
+                                            <li role="menuitem"><a href="#">Year</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <input type="text" class="form-control" placeholder="Search">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-centered">
+                        <div class="input-sort-group">
+                            <div class="input-group input-sort-group-element">
+                                <div class="input-sort-group-text">SORT BY: </div>
+                                <div class="btn-group">
+                                    <label class="btn btn-success" ng-model="radioModel" uib-btn-radio="'Left'" uncheckable>IMDB Rating <span class="caret"></span></label>
+                                    <label class="btn btn-success" ng-model="radioModel" uib-btn-radio="'Middle'" uncheckable>IMDB Vote <span class="caret"></span></label>
+                                    <label class="btn btn-success" ng-model="radioModel" uib-btn-radio="'Right'" uib-uncheckable="uncheckable">Year <span class="caret"></span></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-centered">
+                        <div ng-controller="PaginationDemoCtrl" class="pagination-element">
+                            <ul uib-pagination total-items="TotalItems" ng-change="pageChanged()" ng-model="CurrentPage" max-size="maxSize" items-per-page="itemsPerPage" class="pagination-sm" boundary-link-numbers="true"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid movielist-container">
+                <div class="row row-centered">
+                    <div class="col-md-3 col-centered">
+                        <div class="movie-card">
+                            <div class="rating-circle">
+                                <div class="rating-circle-score">8.1</div>
+                            </div>
+                            <h5>Movie TitleMovie TitleMovie TitleMovie TitleMovie TitleMovie TitleMovie TitleMovie Titleddddddd</h5>
+                            <div>
+                                <img ng-src="http://ia.media-imdb.com/images/M/MV5BMTk2NTI1MTU4N15BMl5BanBnXkFtZTcwODg0OTY0Nw@@._V1_SX300.jpg" alt="movieimage">
+                            </div>
+                            <div>
+                                Action, Sci-Fi, Thriller | 2012
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-centered">
+                        <div class="movie-card">
+                            <div class="rating-circle">
+                                <div class="rating-circle-score">8.1</div>
+                            </div>
+                            <h5>Movie TitleMovie TitleMovie TitleMovie TitleMovie TitleMovie TitleMovie TitleMovie Titleddddddd</h5>
+                            <div>
+                                <img ng-src="http://ia.media-imdb.com/images/M/MV5BMTk2NTI1MTU4N15BMl5BanBnXkFtZTcwODg0OTY0Nw@@._V1_SX300.jpg" alt="movieimage">
+                            </div>
+                            <div>
+                                Action, Sci-Fi, Thriller | 2012
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-centered">
+                        <div class="movie-card">
+                            <div class="rating-circle">
+                                <div class="rating-circle-score">8.1</div>
+                            </div>
+                            <h5>Movie TitleMovie TitleMovie TitleMovie TitleMovie TitleMovie TitleMovie TitleMovie Titleddddddd</h5>
+                            <div>
+                                <img ng-src="http://ia.media-imdb.com/images/M/MV5BMTk2NTI1MTU4N15BMl5BanBnXkFtZTcwODg0OTY0Nw@@._V1_SX300.jpg" alt="movieimage">
+                            </div>
+                            <div>
+                                Action, Sci-Fi, Thriller | 2012
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-centered">
+                        <div class="movie-card">
+                            <div class="rating-circle">
+                                <div class="rating-circle-score">8.1</div>
+                            </div>
+                            <h5>Movie TitleMovie TitleMovie TitleMovie TitleMovie TitleMovie TitleMovie TitleMovie Titleddddddd</h5>
+                            <div>
+                                <img ng-src="http://ia.media-imdb.com/images/M/MV5BMTk2NTI1MTU4N15BMl5BanBnXkFtZTcwODg0OTY0Nw@@._V1_SX300.jpg" alt="movieimage">
+                            </div>
+                            <div>
+                                Action, Sci-Fi, Thriller | 2012
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </content>
+        <footer>
+        </footer>
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-animate.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-sanitize.js"></script>
+        <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.5.0.js"></script>
+        <script src="js/example.js"></script>
+    </body>
+</html>
