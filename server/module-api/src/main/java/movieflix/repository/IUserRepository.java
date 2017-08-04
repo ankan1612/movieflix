@@ -8,11 +8,12 @@ import java.util.List;
  * Created by Ankan on 7/24/2017.
  */
 public interface IUserRepository {
-    public List<User> findAll();
-    public  User findOne(String id);
-    public  User findByEmail(String email);
-    public List<User> findByRole(String role);
-    public  User create(User emp);
-    public  User update(User emp);
-    public void  delete(User emp);
+     List<User> findAll();
+      User findOne(String id);
+      User findByEmail(String email);
+    User findByEmailPassword(String email, String password);
+     List<User> findByRole(String role);
+      User create(User emp);
+      User update(User emp);
+     void  delete(User emp);
 }

@@ -11,6 +11,7 @@ public interface IUserService {
      List<User> findAll();
      User findOne(String id);
     List<User> findByRole(String role);
+    User findOneByEmailPassword(String email, String password);
     User create(User user);
       User update(String id, User user);
      void  delete(String id);

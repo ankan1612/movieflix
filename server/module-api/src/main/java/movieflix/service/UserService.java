@@ -37,6 +37,17 @@ public class UserService implements IUserService {
     }
 
     @Override
+    public User findOneByEmailPassword(String email, String password) {
+        System.out.println(email);
+        System.out.println(password);
+        User existing = repository.findByEmailPassword(email,password);
+        if(existing==null) {
+            throw new UserNotFoundException("User with email and password combination not found");
+        }
+        return existing;
+    }
+
+    @Override
     public List<User> findByRole(String role) {
         List<User> existing = repository.findByRole(role);
         if(existing==null) {

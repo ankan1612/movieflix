@@ -1,6 +1,8 @@
 package movieflix.entity;
 
 import com.sun.istack.internal.NotNull;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -10,9 +12,11 @@ import javax.persistence.*;
  */
 @Entity
 @Table
+@DynamicInsert
 @NamedQueries({
         @NamedQuery(name = "User.findAll", query = "SELECT u from  User  u ORDER BY u.email ASC"),
         @NamedQuery(name = "User.findByEmail", query = "SELECT u from User u WHERE u.email=:pEmail"),
+        @NamedQuery(name = "User.findByEmailPassword", query = "SELECT u from User u WHERE u.email=:pEmail and u.password=:pPassword"),
         @NamedQuery(name = "User.findByRole", query = "SELECT u from User u WHERE u.role=:pRole")
 })
 public class User {
@@ -77,7 +81,6 @@ public class User {
     private String email;
     @NotNull
     private String password;
-    @NotNull
+    @Column(updatable = false, columnDefinition = "varchar(255) default 'USER'")
     private String role;
-
 }
