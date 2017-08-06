@@ -1,0 +1,305 @@
+<!doctype html>
+<html ng-app="movieflix">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<link href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" rel="stylesheet"/>-->
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style_details.css" rel="stylesheet">
+</head>
+
+<body>
+<header>
+    <div ng-controller="CollapseDemoCtrl">
+        <nav class="navbar navbar-light navbar-fixed-top navbar-header" role="navigation ">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle back-black" ng-click="isNavCollapsed = !isNavCollapsed">
+                        <span class="sr-only btn-danger">Toggle navigation</span>
+                        <span class="icon-bar btn-danger"></span>
+                        <span class="icon-bar btn-danger"></span>
+                        <span class="icon-bar btn-danger"></span>
+                    </button>
+                    <a class="navbar-brand navbar-header-a" href="#">
+                        <img class="img-responsive" alt="MovieFlix Logo" src="https://s3.amazonaws.com/ankan/MovieFlix.png">
+                    </a>
+                </div>
+                <div class="collapse navbar-collapse navbar-header-collapse" uib-collapse="isNavCollapsed" style="overflow:visible;">
+                    <div class="navbar-brand navbar-header-account">
+                        <div class="btn-group" uib-dropdown>
+                            <button id="split-button" type="button" class="btn btn-danger">Ankan Kumar Giri</button>
+                            <button type="button" class="btn btn-danger" uib-dropdown-toggle>
+                                <span class="caret"></span>
+                                <span class="sr-only">Split button!</span>
+                            </button>
+                            <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="split-button">
+                                <li role="menuitem"><a href="#"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> My Account</a></li>
+                                <li class="divider"></li>
+                                <li role="menuitem"><a href="#"><span class="glyphicon glyphicon-off" aria-hidden="true"></span> Logout</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+</header>
+<content>
+    <div class="container-fluid moviedetails-container">
+        <div class="row-fluid">
+            <div class="col-md-2 col-md-offset-2 movie-img-col">
+                <div class="movie-img">
+                    <img ng-src="http://ia.media-imdb.com/images/M/MV5BMTk2NTI1MTU4N15BMl5BanBnXkFtZTcwODg0OTY0Nw@@._V1_SX300.jpg" alt="movieimage">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="panel panel-default movie-details-header">
+                    <div class="panel-heading movie-details-header">
+                        <div class="panel-title white font-30">Avengers: Age of Ultron - 2015
+                            <div ng-controller="RatingDemoCtrl" class="font-20">
+                                <span class="orange" uib-rating ng-model="rate" max="max" read-only="isReadonly" titles="['1','2','3']"></span>
+                                <span>({{rate}}) 420369 votes</span>
+                            </div>
+                        </div>
+                        <hr class="title-hr">
+                    </div>
+                    <div class="panel-body">
+                        <div class="font-15 movie-info">
+                            <ul>
+                                <li>PG-13</li>
+                                <li>English</li>
+                                <li>USA</li>
+                            </ul>
+                        </div>
+                        <div class="font-15">
+                            <div>Action, Adventure, Sci-Fi</div>
+                            <div>Released : 2015-05-01</div>
+                            <div>Runtime : 141 min</div>
+                            <div>Directed By : Joss Whedon</div>
+                            <div>Writen By : Joss Whedon, Stan Lee (Marvel comics), Jack Kirby (Marvel comics)</div>
+                            <div>Cast : Robert Downey Jr., Chris Hemsworth, Mark Ruffalo, Chris Evans</div>
+                            <div>Awards : 1 win & 12 nominations.</div>
+                            <div>Type : Movie</div>
+                            <div ng-controller="UserFixedRatingDemoCtrl">
+                                User Rating : <span class="orange" uib-rating ng-model="rate" max="max" read-only="isReadonly" titles="['1','2','3']"></span>
+                                <span>({{rate}}) 15 votes</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="font-15">Plot: When Tony Stark and Bruce Banner try to jump-start a dormant peacekeeping program called Ultron, things go horribly wrong and it's up to Earth's Mightiest Heroes to stop the villainous Ultron from enacting his terrible plans.</div>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="col-md-8 col-md-offset-2 pad-top-20">
+                <div class="panel panel-default">
+                    <div class="panel-heading back-black">
+                        <div class="panel-title font-20 white">
+                            You have not yet rated this movie/series!!
+                        </div>
+                    </div>
+                    <div class="panel-body font-15 gray">
+                        <div ng-controller="UserRatingDemoCtrl" class="font-15">
+                            Please Rate :
+                            <span class="orange" uib-rating ng-model="rate" max="max" read-only="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null" titles="['1','2','3']" aria-labelledby="default-rating"></span>
+                            <span class="label" ng-class="{'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}" ng-show="overStar && !isReadonly">{{percent}}%</span>
+                            <span>({{rate}})</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1"><span class="glyphicon glyphicon-pencil"></span> Comment : </label>
+                            <textarea rows="2" class="form-control text-area" id="exampleInputEmail1" placeholder="Comment"></textarea>
+                        </div>
+                        <div class="row-right">
+                            <button type="button" class="btn btn-primary">Post</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div ng-controller="UserEditRating as usereditVM">
+            <div class="row-fluid">
+                <div class="col-md-8 col-md-offset-2 pad-top-20">
+                    <div class="panel panel-default" ng-if="!usereditVM.edit">
+                        <div class="panel-heading back-black">
+                            <div class="panel-title white font-20 overflow-hid">
+                                Ankan Kumar Giri
+                                <span class="orange" uib-rating ng-model="usereditVM.rating1" max="usereditVM.max" read-only="usereditVM.isReadonly1"></span>
+                                <span>({{usereditVM.rating1}})</span>
+                                <span class="float-right font-15">08-06-2017 12:00:00</span>
+                            </div>
+                        </div>
+                        <div class="panel-body gray font-15">
+                            <div class="form-group">
+                                {{usereditVM.comment1}}
+                            </div>
+                            <div class="row-right">
+                                <button type="button" class="btn btn-primary" ng-click="usereditVM.edit=true">Edit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="panel panel-default" ng-if="usereditVM.edit">
+                        <div class="panel-heading back-black">
+                            <div class="panel-title white font-20">
+                                Ankan Kumar Giri
+                            </div>
+                        </div>
+                        <div class="panel-body gray white font-15">
+                            Please Rate :
+                            <span class="orange" uib-rating ng-model="usereditVM.rating2" max="usereditVM.max" read-only="usereditVM.isReadonly2" on-hover="usereditVM.hoveringOver(value)" on-leave="usereditVM.overStar = null" titles="['1','2','3']" aria-labelledby="default-rating"></span>
+                            <span class="label" ng-class="{'label-warning': usereditVM.percent<30, 'label-info': usereditVM.percent>=30 && usereditVM.percent<70, 'label-success': usereditVM.percent>=70}" ng-show="usereditVM.overStar && !usereditVM.isReadonly2">{{usereditVM.percent}}%</span>
+                            <span>({{usereditVM.rating2}})</span>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1"><span class="glyphicon glyphicon-pencil"></span> Comment : </label>
+                                <textarea rows="2" class="form-control text-area" id="exampleInputEmail1" ng-model="usereditVM.comment2" placeholder="Comment"></textarea>
+                            </div>
+                            <div class="row-right">
+                                <button type="button" class="btn btn-primary">Update</button>
+                                <button type="button" class="btn btn-danger" ng-click="usereditVM.edit=false">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="col-md-8 col-md-offset-2">
+                <hr>
+                <div class="font-20">See what others have to say : </div>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="col-md-8 col-md-offset-2 pad-top-20">
+                <div class="panel panel-default">
+                    <div class="panel-heading back-black white">
+                        <div ng-controller="UserFixedRatingDemoCtrl" class="font-20 white overflow-hid">
+                            John Taylor
+                            <span class="orange" uib-rating ng-model="rate" max="max" read-only="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null" titles="['1','2','3']" aria-labelledby="default-rating"></span>
+                            <span>({{rate}})</span>
+                            <span class="float-right font-15">08-06-2017 12:00:00</span>
+                        </div>
+                    </div>
+                    <div class="panel-body gray font-15">
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has
+                        survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with
+                        desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="col-md-8 col-md-offset-2 pad-top-20">
+                <div class="panel panel-default">
+                    <div class="panel-heading back-black white">
+                        <div ng-controller="UserFixedRatingDemoCtrl" class="font-20 white overflow-hid">
+                            John Taylor
+                            <span class="orange" uib-rating ng-model="rate" max="max" read-only="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null" titles="['1','2','3']" aria-labelledby="default-rating"></span>
+                            <span>({{rate}})</span>
+                            <span class="float-right font-15">08-06-2017 12:00:00</span>
+                        </div>
+                    </div>
+                    <div class="panel-body gray font-15">
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has
+                        survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with
+                        desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="col-md-8 col-md-offset-2 pad-top-20">
+                <div class="panel panel-default">
+                    <div class="panel-heading back-black white">
+                        <div ng-controller="UserFixedRatingDemoCtrl" class="font-20 white overflow-hid">
+                            John Taylor
+                            <span class="orange" uib-rating ng-model="rate" max="max" read-only="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null" titles="['1','2','3']" aria-labelledby="default-rating"></span>
+                            <span>({{rate}})</span>
+                            <span class="float-right font-15">08-06-2017 12:00:00</span>
+                        </div>
+                    </div>
+                    <div class="panel-body gray font-15">
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has
+                        survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with
+                        desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="col-md-8 col-md-offset-2 pad-top-20">
+                <div class="panel panel-default">
+                    <div class="panel-heading back-black white">
+                        <div ng-controller="UserFixedRatingDemoCtrl" class="font-20 white overflow-hid">
+                            John Taylor
+                            <span class="orange" uib-rating ng-model="rate" max="max" read-only="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null" titles="['1','2','3']" aria-labelledby="default-rating"></span>
+                            <span>({{rate}})</span>
+                            <span class="float-right font-15">08-06-2017 12:00:00</span>
+                        </div>
+                    </div>
+                    <div class="panel-body gray font-15">
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has
+                        survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with
+                        desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="col-md-8 col-md-offset-2 pad-top-20">
+                <div class="panel panel-default">
+                    <div class="panel-heading back-black white">
+                        <div ng-controller="UserFixedRatingDemoCtrl" class="font-20 white overflow-hid">
+                            John Taylor
+                            <span class="orange" uib-rating ng-model="rate" max="max" read-only="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null" titles="['1','2','3']" aria-labelledby="default-rating"></span>
+                            <span>({{rate}})</span>
+                            <span class="float-right font-15">08-06-2017 12:00:00</span>
+                        </div>
+                    </div>
+                    <div class="panel-body gray font-15">
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has
+                        survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with
+                        desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="col-md-8 col-md-offset-2 pad-top-20">
+                <div class="panel panel-default">
+                    <div class="panel-heading back-black white">
+                        <div ng-controller="UserFixedRatingDemoCtrl" class="font-20 white overflow-hid">
+                            John Taylor
+                            <span class="orange" uib-rating ng-model="rate" max="max" read-only="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null" titles="['1','2','3']" aria-labelledby="default-rating"></span>
+                            <span>({{rate}})</span>
+                            <span class="float-right font-15">08-06-2017 12:00:00</span>
+                        </div>
+                    </div>
+                    <div class="panel-body gray font-15">
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has
+                        survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with
+                        desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</content>
+<footer>
+</footer>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-animate.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-sanitize.js"></script>
+<script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.5.0.js"></script>
+<script src="js/example_details.js"></script>
+</body>
+
+</html>
