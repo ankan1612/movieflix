@@ -1,0 +1,147 @@
+<!doctype html>
+<html ng-app="movieflix">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<link href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" rel="stylesheet"/>-->
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style_edit.css" rel="stylesheet">
+</head>
+
+<body>
+<header>
+    <div ng-controller="CollapseDemoCtrl">
+        <nav class="navbar navbar-light navbar-fixed-top navbar-header" role="navigation ">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle back-black" ng-click="isNavCollapsed = !isNavCollapsed">
+                        <span class="sr-only btn-danger">Toggle navigation</span>
+                        <span class="icon-bar btn-danger"></span>
+                        <span class="icon-bar btn-danger"></span>
+                        <span class="icon-bar btn-danger"></span>
+                    </button>
+                    <a class="navbar-brand navbar-header-a" href="#">
+                        <img class="img-responsive" alt="MovieFlix Logo" src="https://s3.amazonaws.com/ankan/MovieFlix.png">
+                    </a>
+                </div>
+                <div class="collapse navbar-collapse navbar-header-collapse" uib-collapse="isNavCollapsed" style="overflow:visible;">
+                    <div class="navbar-brand navbar-header-account">
+                        <div class="btn-group" uib-dropdown>
+                            <button id="split-button" type="button" class="btn btn-danger">Ankan Kumar Giri</button>
+                            <button type="button" class="btn btn-danger" uib-dropdown-toggle>
+                                <span class="caret"></span>
+                                <span class="sr-only">Split button!</span>
+                            </button>
+                            <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="split-button">
+                                <li role="menuitem"><a href="#"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> My Account</a></li>
+                                <li class="divider"></li>
+                                <li role="menuitem"><a href="#"><span class="glyphicon glyphicon-off" aria-hidden="true"></span> Logout</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+</header>
+<content>
+    <div class="container-fluid moviedetails-container" ng-controller="UserEditMovie as usereditVM">
+        <div class="row-fluid">
+            <div class="col-md-2 col-md-offset-2 movie-img-col">
+                <div class="movie-img">
+                    <img ng-src={{ModalDemo.poster}} alt="movieimage">
+                </div>
+                <div style="position: absolute; margin-left:180px;top:25px;"  ng-controller="ModalDemoCtrl as $ctrl" class="modal-demo">
+                    <button type="button" class="btn btn-default btn-lg" ng-click="$ctrl.open()">
+                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                    </button>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="panel panel-default movie-details-header">
+                    <div class="panel-heading movie-details-header">
+                        <div class="col-md-10">
+                            <div class="form-group">
+                                <input type="text" ng-model="usereditVM.title" class="form-control font-30" id="title" placeholder="Title">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <input type="text" style="width:100px" ng-model="usereditVM.year" class="form-control font-20" id="title" placeholder="Year">
+                            </div>
+                        </div>
+                        <div class="panel-title white font-30">
+                            <div class="font-20" style="padding: 6px 12px;">
+                                <span class="orange" uib-rating ng-model="usereditVM.rate" max="usereditVM.max" read-only="usereditVM.isReadonly" on-hover="usereditVM.hoveringOver(value)" on-leave="usereditVM.overStar = null" titles="['1','2','3']" aria-labelledby="default-rating"></span>
+                                <span class="label" ng-class="{'label-warning': usereditVM.percent<30, 'label-info': usereditVM.percent>=30 && usereditVM.percent<70, 'label-success': usereditVM.percent>=70}" ng-show="usereditVM.overStar && !usereditVM.isReadonly">{{usereditVM.percent}}%</span>
+                                <span>({{usereditVM.rate}})</span>
+                                <input type="text" ng-model="usereditVM.votes" class="form-control font-20" style="display:inline; width:200px; height:25px" id="title" placeholder="Votes">
+                            </div>
+                        </div>
+                        <hr class="title-hr">
+                    </div>
+                    <div class="panel-body">
+                        <div class="font-15 movie-info form-group">
+                            <ul>
+                                <li><input type="text" ng-model="usereditVM.rated" class="form-control" style="display:inline; width:200px; height:25px" id="title" placeholder="Rated"></li>
+                                <li><input type="text" ng-model="usereditVM.language" class="form-control" style="display:inline; width:200px; height:25px" id="title" placeholder="Language"></li>
+                                <li><input type="text" ng-model="usereditVM.country" class="form-control" style="display:inline; width:200px; height:25px" id="title" placeholder="Country"></li>
+                            </ul>
+                        </div>
+                        <div class="form-group font-15">
+                            <div class="form-group">
+                                <input type="text" style="width:300px;height:25px" ng-model="usereditVM.genre" class="form-control" id="title" placeholder="Genre">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" style="width:150px;height:25px" ng-model="usereditVM.released" class="form-control" id="title" placeholder="Released">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" style="width:150px;height:25px" ng-model="usereditVM.runtime" class="form-control" id="title" placeholder="Runtime">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" style="width:400px;height:25px" ng-model="usereditVM.director" class="form-control" id="title" placeholder="Directed By">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" style="width:400px;height:25px" ng-model="usereditVM.writer" class="form-control" id="title" placeholder="Writen By">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" style="width:400px;height:25px" ng-model="usereditVM.actors" class="form-control" id="title" placeholder="Cast">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" style="width:250px;height:25px" ng-model="usereditVM.awards" class="form-control" id="title" placeholder="Awards">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" style="width:150px;height:25px" ng-model="usereditVM.type" class="form-control" id="title" placeholder="Type">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="col-md-8 col-md-offset-2">
+                <textarea rows="3" class="form-control text-area" ng-model="usereditVM.plot" id="exampleInputEmail1" placeholder="Plot"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="row-fluid row-centered pad-top-20">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="form-group">
+                <button type="button" class="btn btn-primary">Update Changes</button>
+                <button type="button" class="btn btn-danger">Cancel</button>
+            </div>
+        </div>
+    </div>
+</content>
+<footer>
+</footer>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-animate.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-sanitize.js"></script>
+<script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.5.0.js"></script>
+<script src="js/example_edit.js"></script>
+</body>
+
+</html>
