@@ -38,11 +38,18 @@ public class UserService implements IUserService {
 
     @Override
     public User findOneByEmailPassword(String email, String password) {
-        System.out.println(email);
-        System.out.println(password);
         User existing = repository.findByEmailPassword(email,password);
         if(existing==null) {
             throw new UserNotFoundException("User with email and password combination not found");
+        }
+        return existing;
+    }
+
+    @Override
+    public User findOneByEmail(String email) {
+        User existing = repository.findByEmail(email);
+        if(existing==null) {
+            throw new UserNotFoundException("User with email: "+email+" not found");
         }
         return existing;
     }

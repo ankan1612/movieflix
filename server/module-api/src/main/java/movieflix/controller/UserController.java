@@ -29,9 +29,14 @@ public class UserController {
         return service.findOne(id);
     }
     @RequestMapping(method = RequestMethod.GET, path="authenticate",  produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public User findOneByEmail(@RequestParam String email, @RequestParam String password)
+    public User findOneByEmailPassword(@RequestParam String email, @RequestParam String password)
     {
         return service.findOneByEmailPassword(email,password);
+    }
+    @RequestMapping(method = RequestMethod.GET, path="search",  produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public User findOneByEmail(@RequestParam String email)
+    {
+        return service.findOneByEmail(email);
     }
     @RequestMapping(method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public User create(@RequestBody User user)
