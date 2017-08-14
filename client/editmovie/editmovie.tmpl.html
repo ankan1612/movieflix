@@ -1,0 +1,93 @@
+<div class="container-fluid moviedetails-container" ng-controller="EditMovieCtrl as editMovieVM">
+  <div class="row-fluid">
+    <div class="col-md-2 col-md-offset-2 movie-img-col">
+      <div class="movie-img">
+        <img ng-src={{editMoviePosterModalService.poster}} alt="movieimage">
+      </div>
+      <div style="position: absolute; margin-left:180px;top:25px;" ng-controller="EditMoviePosterModal as $ctrl" class="modal-demo">
+        <button type="button" class="btn btn-default btn-lg" ng-click="$ctrl.open()">
+          <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+        </button>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="panel panel-default movie-details-header">
+        <div class="panel-heading movie-details-header">
+          <div class="col-md-10">
+            <div class="form-group">
+              <input type="text" ng-model="editMovieVM.movie.title" class="form-control font-30" id="title" placeholder="Title">
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="form-group">
+              <input type="text" style="width:100px" ng-model="editMovieVM.movie.year" class="form-control font-20" id="title" placeholder="Year">
+            </div>
+          </div>
+          <div class="panel-title white font-30">
+            <div class="font-20" style="padding: 6px 12px;">
+              <span class="orange" uib-rating ng-model="editMovieVM.movie.imdbRating" max="editMovieVM.max" read-only="editMovieVM.isReadonly" on-hover="editMovieVM.hoveringOver(value)" on-leave="editMovieVM.overStar = null" titles="['1','2','3']" aria-labelledby="default-rating"></span>
+              <span class="label" ng-class="{'label-warning': editMovieVM.percent<30, 'label-info': editMovieVM.percent>=30 && editMovieVM.percent<70, 'label-success': editMovieVM.percent>=70}" ng-show="editMovieVM.overStar && !editMovieVM.isReadonly">{{editMovieVM.percent}}%</span>
+              <span>({{editMovieVM.movie.imdbRating}})</span>
+              <input type="text" ng-model="editMovieVM.movie.imdbVotes" class="form-control font-20" style="display:inline; width:200px; height:25px" id="title" placeholder="Votes">
+            </div>
+          </div>
+          <hr class="title-hr">
+        </div>
+        <div class="panel-body">
+          <div class="font-15 movie-info form-group">
+            <ul>
+              <li>
+                <input type="text" ng-model="editMovieVM.movie.rated" class="form-control" style="display:inline; width:200px; height:25px" id="title" placeholder="Rated">
+              </li>
+              <li>
+                <input type="text" ng-model="editMovieVM.movie.language" class="form-control" style="display:inline; width:200px; height:25px" id="title" placeholder="Language">
+              </li>
+              <li>
+                <input type="text" ng-model="editMovieVM.movie.country" class="form-control" style="display:inline; width:200px; height:25px" id="title" placeholder="Country">
+              </li>
+            </ul>
+          </div>
+          <div class="form-group font-15">
+            <div class="form-group">
+              <input type="text" style="width:300px;height:25px" ng-model="editMovieVM.movie.genre" class="form-control" id="title" placeholder="Genre">
+            </div>
+            <div class="form-group">
+              <input type="text" style="width:150px;height:25px" ng-model="editMovieVM.movie.released" class="form-control" id="title" placeholder="Released">
+            </div>
+            <div class="form-group">
+              <input type="text" style="width:150px;height:25px" ng-model="editMovieVM.movie.runtime" class="form-control" id="title" placeholder="Runtime">
+            </div>
+            <div class="form-group">
+              <input type="text" style="width:400px;height:25px" ng-model="editMovieVM.movie.director" class="form-control" id="title" placeholder="Directed By">
+            </div>
+            <div class="form-group">
+              <input type="text" style="width:400px;height:25px" ng-model="editMovieVM.movie.writer" class="form-control" id="title" placeholder="Writen By">
+            </div>
+            <div class="form-group">
+              <input type="text" style="width:400px;height:25px" ng-model="editMovieVM.movie.actor" class="form-control" id="title" placeholder="Cast">
+            </div>
+            <div class="form-group">
+              <input type="text" style="width:250px;height:25px" ng-model="editMovieVM.movie.awards" class="form-control" id="title" placeholder="Awards">
+            </div>
+            <div class="form-group">
+              <input type="text" style="width:150px;height:25px" ng-model="editMovieVM.movie.type" class="form-control" id="title" placeholder="Type">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row-fluid">
+    <div class="col-md-8 col-md-offset-2">
+      <textarea rows="3" class="form-control text-area" ng-model="editMovieVM.movie.plot" id="exampleInputEmail1" placeholder="Plot"></textarea>
+    </div>
+  </div>
+</div>
+<div class="row-fluid row-centered pad-top-20">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="form-group">
+      <button type="button" class="btn btn-primary">Update Changes</button>
+      <button type="button" class="btn btn-danger">Cancel</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+<div class="movie-card">
+  <div class="rating-circle">
+    <div class="rating-circle-score">{{movieDetails.imdbRating}}</div>
+  </div>
+  <h5>{{movieDetails.title}}</h5>
+  <div>
+    <a ng-href="#!/movies/{{movieDetails.imdbId}}">
+      <img ng-src="{{movieDetails.poster}}" alt="movieimage">
+    </a>
+  </div>
+  <div>
+    {{movieDetails.genre}} | {{movieDetails.year}}
+  </div>
+</div>

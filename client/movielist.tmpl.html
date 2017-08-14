@@ -1,0 +1,56 @@
+<div ng-controller="MovieCtrl as movieVM">
+  <div ng-controller="PaginationCtrl as paginationVM">
+    <div class="container-fluid movielist-option-container">
+      <div class="row row-centered">
+        <div class="col-lg-4 col-centered">
+          <div class="input-search-group">
+            <div class="input-group">
+              <div class="input-group-btn">
+                <div class="btn-group" uib-dropdown dropdown-append-to-body>
+                  <button id="btn-append-to-body" type="button" class="btn btn-primary" uib-dropdown-toggle>
+                    {{movieVM.searchCriteria}} <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-body">
+                    <li role="menuitem" ng-click="movieVM.changeSearchCriteria('All')"><a href="#">All</a></li>
+                    <li class="divider"></li>
+                    <li role="menuitem" ng-click="movieVM.changeSearchCriteria('Type')"><a href="">Type</a></li>
+                    <li role="menuitem" ng-click="movieVM.changeSearchCriteria('Genre')"><a href="">Genre</a></li>
+                    <li role="menuitem" ng-click="movieVM.changeSearchCriteria('Year')"><a href="">Year</a></li>
+                  </ul>
+                </div>
+              </div>
+              <input type="text" class="form-control" placeholder="Search" ng-model="movieVM.searchText">
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-centered">
+          <div class="input-sort-group">
+            <div class="input-group input-sort-group-element">
+              <div class="input-sort-group-text">SORT BY: </div>
+              <div class="btn-group">
+                <label class="btn btn-success" ng-click="movieVM.sorter.sortBy='imdbRating'; movieVM.sorter.sortOrder = !movieVM.sorter.sortOrder;" ng-model="radioModel" uib-btn-radio="'Left'">IMDB Rating
+                  <span ng-if="movieVM.sorter.sortBy==='imdbRating' && movieVM.sorter.sortOrder===true" class="glyphicon glyphicon-triangle-bottom"></span><span ng-if="movieVM.sorter.sortBy==='imdbRating' && movieVM.sorter.sortOrder==false" class="glyphicon glyphicon-triangle-top"></span></label>
+                <label class="btn btn-success" ng-click="movieVM.sorter.sortBy='imdbVotes'; movieVM.sorter.sortOrder = !movieVM.sorter.sortOrder;" ng-model="radioModel" uib-btn-radio="'Middle'">
+                  IMDB Vote <span ng-if="movieVM.sorter.sortBy==='imdbVotes' && movieVM.sorter.sortOrder===true" class="glyphicon glyphicon-triangle-bottom"></span><span ng-if="movieVM.sorter.sortBy==='imdbVotes' && movieVM.sorter.sortOrder===false" class="glyphicon glyphicon-triangle-top"></span></label>
+                <label class="btn btn-success" ng-click="movieVM.sorter.sortBy='year'; movieVM.sorter.sortOrder = !movieVM.sorter.sortOrder;" ng-model="radioModel" uib-btn-radio="'Right'">
+                  Year <span ng-if="movieVM.sorter.sortBy==='year' && movieVM.sorter.sortOrder===true" class="glyphicon glyphicon-triangle-bottom"></span><span ng-if="movieVM.sorter.sortBy==='year' && movieVM.sorter.sortOrder===false" class="glyphicon glyphicon-triangle-top"></span></label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-centered">
+          <div class="pagination-element">
+            <ul uib-pagination total-items="PaginationService.TotalItems" ng-change="paginationVM.pageChanged()" ng-model="paginationVM.CurrentPage" max-size="paginationVM.maxSize" items-per-page="paginationVM.itemsPerPage" class="pagination-sm" boundary-link-numbers="true"></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid movielist-container">
+      <div class="row row-centered">
+        <div class="col-md-3 col-centered" ng-repeat="movie in movieVM.filteredmovies | orderBy:movieVM.sorter.sortBy: movieVM.sorter.sortOrder | startFrom:(paginationVM.CurrentPage-1)*paginationVM.itemsPerPage | limitTo:paginationVM.itemsPerPage">
+          <movie-thumbnail  movie-details="movie"></movie-thumbnail>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

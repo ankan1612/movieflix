@@ -1,0 +1,86 @@
+<!doctype html>
+<html ng-app="movieflix">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+  <link href="moviedetails/style.css" rel="stylesheet">
+  <link href="editmovie/style.css" rel="stylesheet">
+  <script>
+    document.write('<base href="' + document.location + '" />')
+  </script>
+</head>
+
+<body>
+  <header>
+    <div ng-controller="NavCollapseContrl">
+      <nav class="navbar navbar-light navbar-fixed-top navbar-header" role="navigation ">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle navbar-header-button" ng-click="isNavCollapsed = !isNavCollapsed">
+              <span class="sr-only btn-danger">Toggle navigation</span>
+              <span class="icon-bar btn-danger"></span>
+              <span class="icon-bar btn-danger"></span>
+              <span class="icon-bar btn-danger"></span>
+            </button>
+            <a class="navbar-brand navbar-header-a" href="#">
+              <img class="img-responsive" alt="MovieFlix Logo" src="https://s3.amazonaws.com/ankan/MovieFlix.png">
+            </a>
+          </div>
+          <div class="collapse navbar-collapse navbar-header-collapse" uib-collapse="isNavCollapsed" style="overflow:visible;">
+            <div class="navbar-brand navbar-header-account">
+              <div class="btn-group" uib-dropdown>
+                <button id="split-button" type="button" class="btn btn-danger">Ankan Kumar Giri</button>
+                <button type="button" class="btn btn-danger" uib-dropdown-toggle>
+                  <span class="caret"></span>
+                  <span class="sr-only">Split button!</span>
+                </button>
+                <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="split-button">
+                  <li role="menuitem"><a href="#"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> My Account</a></li>
+                  <li class="divider"></li>
+                  <li role="menuitem"><a href="#"><span class="glyphicon glyphicon-off" aria-hidden="true"></span> Logout</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+  <content>
+    <div ng-view>
+    </div>
+  </content>
+  <footer>
+  </footer>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular-animate.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular-sanitize.js"></script>
+  <script src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.5.0.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular-messages.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular-route.js"></script>
+  <script src="https://cdn.jsdelivr.net/lodash/4.17.4/lodash.min.js"></script>
+  <script src="app.module.js"></script>
+  <script src="navCollapse.controller.js"></script>
+  <script src="pagination.controller.js"></script>
+  <script src="movieThumbnail.directive.js"></script>
+  <script src="movies.controller.js"></script>
+  <script src="movies.service.js"></script>
+  <script src="pagination.factory.js"></script>
+  <script src="pagination.filter.js"></script>
+  <script src="toArray.filter.js"></script>
+  <script src="moviedetails/moviedetails.controller.js"></script>
+  <script src="moviedetails/moviedetails.service.js"></script>
+  <script src="moviedetails/otherratings.service.js"></script>
+  <script src="editmovie/example.js"></script>
+  <script src="editmovie/editMovieCntrl.controller.js"></script>
+  <script src="editmovie/editMoviePosterModal.controller.js"></script>
+  <script src="editmovie/editMovieService.service.js"></script>
+  <script src="editmovie/editMovieModalPoster.service.js"></script>
+
+</body>
+
+</html>
