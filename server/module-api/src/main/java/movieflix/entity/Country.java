@@ -37,6 +37,7 @@ public class Country {
     @GeneratedValue(generator = "customUUID")
     private  String countryId;
     @NotNull
+    @Column(unique = true)
     private String name;
 }
 

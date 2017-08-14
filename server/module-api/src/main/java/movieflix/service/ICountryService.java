@@ -11,7 +11,10 @@ public interface ICountryService {
      List<Country> findAll();
      Country findOne(String id);
      Country findByName(String name);
-      Country create(Country country);
+
+    Country checkByName(String name);
+
+    Country create(Country country);
       Country update(String id, Country country);
      void  delete(String id);
 }

@@ -37,6 +37,7 @@ public class Genre {
     @GeneratedValue(generator = "customUUID")
     private  String genreId;
     @NotNull
+    @Column(unique = true)
     private String name;
 
 }

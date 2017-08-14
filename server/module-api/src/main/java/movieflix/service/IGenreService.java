@@ -11,6 +11,9 @@ public interface IGenreService {
     List<Genre> findAll();
     Genre findOne(String id);
     Genre findByName(String name);
+
+    Genre checkByName(String name);
+
     Genre create(Genre genre);
     Genre update(String id, Genre genre);
     void  delete(String id);

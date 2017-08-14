@@ -1,14 +1,18 @@
 package movieflix.service;
 
-import movieflix.entity.Movie;
+import movieflix.entity.*;
 import movieflix.exception.MovieAlreadyExistsException;
 import movieflix.exception.MovieNotFoundException;
+import movieflix.repository.ICountryRepository;
+import movieflix.repository.ILanguageRepository;
 import movieflix.repository.IMovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Ankan on 7/24/2017.
@@ -21,6 +25,18 @@ public class MovieService implements IMovieService {
 
     @Autowired
     IRatingService ratingService;
+
+    @Autowired
+    IGenreService genreService;
+
+    @Autowired
+    ILanguageService languageService;
+
+    @Autowired
+    ICountryService countryService;
+
+    @Autowired
+    ITypeService typeService;
 
     @Override
     public List<Movie> findAll() {
@@ -52,7 +68,64 @@ public class MovieService implements IMovieService {
         {
             throw new MovieAlreadyExistsException("Movie is already in use: " + movie.getImdbId());
         }
-        return repository.create(movie);
+        Movie newMovie = checkContraints(movie);
+        return repository.create(newMovie);
+    }
+
+    public Movie checkContraints(Movie movie)
+    {
+        Set<Genre> genres = movie.getGenre();
+        Set<Genre> newGenres = new HashSet<>();
+        for(Genre g: genres)
+        {
+            Genre genreByName = genreService.checkByName(g.getName());
+            if(genreByName!=null)
+            {
+                newGenres.add(genreByName);
+            }
+            else
+            {
+                newGenres.add(g);
+            }
+        }
+        Set<Language> languages = movie.getLanguage();
+        Set<Language> newLanguages = new HashSet<>();
+        for(Language l: languages)
+        {
+            Language langByName = languageService.checkByName(l.getName());
+            if(langByName!=null)
+            {
+                newLanguages.add(langByName);
+            }
+            else
+            {
+                newLanguages.add(l);
+            }
+        }
+        Set<Country> countries = movie.getCountry();
+        Set<Country> newCountries = new HashSet<>();
+        for(Country c: countries)
+        {
+            Country countryByName = countryService.checkByName(c.getName());
+            if(countryByName!=null)
+            {
+                newCountries.add(countryByName);
+            }
+            else
+            {
+                newCountries.add(c);
+            }
+        }
+        Type type = movie.getType();
+        Type typeByName = typeService.checkByName(type.getName());
+        if(typeByName!=null)
+        {
+            movie.setType(typeByName);
+        }
+        movie.setGenre(newGenres);
+        movie.setLanguage(newLanguages);
+        movie.setCountry(newCountries);
+        return movie;
     }
 
     @Override
@@ -63,7 +136,8 @@ public class MovieService implements IMovieService {
         {
             throw new MovieNotFoundException("Movie with id: " + id + " not found");
         }
-        return repository.update(movie);
+        Movie newMovie = checkContraints(movie);
+        return repository.update(newMovie);
     }
 
     @Override

@@ -1,12 +1,15 @@
 package movieflix.repository;
 
+import movieflix.entity.Genre;
 import movieflix.entity.Movie;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Ankan on 7/25/2017.
@@ -37,7 +40,7 @@ public class MovieRepository implements IMovieRepository {
 
     @Override
     public Movie create(Movie movie) {
-        em.persist(movie);
+        em.merge(movie);
         return movie;
     }
 

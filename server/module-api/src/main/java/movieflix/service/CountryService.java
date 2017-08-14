@@ -1,6 +1,7 @@
 package movieflix.service;
 
 import movieflix.entity.Country;
+import movieflix.entity.Genre;
 import movieflix.exception.*;
 import movieflix.repository.ICountryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,15 @@ public class CountryService implements  ICountryService{
             throw new CountryNotFoundException("Country with name: " + name + " not found");
         }
         return existing;
+    }
+
+    @Override
+    public Country checkByName(String name) {
+        Country existing = repository.findByName(name);
+        if(existing!=null) {
+            return existing;
+        }
+        return null;
     }
 
     @Override

@@ -21,6 +21,7 @@ public class Type {
     @GeneratedValue(generator = "customUUID")
     private  String typeId;
     @NotNull
+    @Column(unique = true)
     private String name;
 
     public String getTypeId() {

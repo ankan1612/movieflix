@@ -70,6 +70,16 @@ public class RatingService implements IRatingService {
     }
 
     @Override
+    public List<Rating> findByMovie(String id) {
+        Movie movie = movieRepository.findOne(id);
+        List<Rating> existing = repository.findByMovie(movie);
+        if(existing.size()<1) {
+            throw new RatingNotFoundException("Rating with movie: " + movie.getTitle() +" not found");
+        }
+        return existing;
+    }
+
+    @Override
     public List<Rating> findByUser(User user) {
         List<Rating> existing = repository.findByUser(user);
         if(existing.size()<1) {
@@ -93,9 +103,16 @@ public class RatingService implements IRatingService {
         Rating existing = repository.findOne(rating.getId());
         if(existing!=null)
         {
-            throw new RatingAlreadyExistsException("Rating with movie: " + rating.getId().getMovie().getTitle() + "and user: "+ rating.getId().getUser().getEmail()  +" not found");
+            throw new RatingAlreadyExistsException("Rating with movie: " + rating.getId().getMovie().getTitle() + "and user: "+ rating.getId().getUser().getEmail()  +" already exists");
         }
-        return repository.create(rating);
+        Rating r = repository.create(rating);
+        Movie m = rating.getId().getMovie();
+        List<Double> avgratings = repository.getAverageByMovie(m);
+        if(avgratings.size()==1) {
+            m.setUserRating(avgratings.get(0));
+            movieRepository.update(m);
+        }
+        return r;
     }
 
     @Transactional
@@ -107,7 +124,14 @@ public class RatingService implements IRatingService {
         {
             throw new RatingNotFoundException("Rating with movie: " + ratingId.getMovie().getTitle() + "and user: "+ ratingId.getUser().getEmail()  +" not found");
         }
-        return repository.update(rating);
+        Rating r = repository.update(rating);
+        Movie m = rating.getId().getMovie();
+        List<Double> avgratings = repository.getAverageByMovie(m);
+        if(avgratings.size()==1) {
+            m.setUserRating(avgratings.get(0));
+            movieRepository.update(m);
+        }
+        return r;
     }
     @Transactional
     @Override
@@ -119,6 +143,12 @@ public class RatingService implements IRatingService {
             throw new RatingNotFoundException("Rating with movie: " + ratingId.getMovie().getTitle() + "and user: "+ ratingId.getUser().getEmail()  +" not found");
         }
         repository.delete(existing);
+        Movie m = existing.getId().getMovie();
+        List<Double> avgratings = repository.getAverageByMovie(m);
+        if(avgratings.size()==1) {
+            m.setUserRating(avgratings.get(0));
+            movieRepository.update(m);
+        }
     }
     @Transactional
     @Override

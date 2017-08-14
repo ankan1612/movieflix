@@ -43,6 +43,15 @@ public class GenreService implements  IGenreService{
     }
 
     @Override
+    public Genre checkByName(String name) {
+        Genre existing = repository.findByName(name);
+        if(existing!=null) {
+            return existing;
+        }
+        return null;
+    }
+
+    @Override
     @Transactional
     public Genre create(Genre genre) {
         Genre existing = repository.findByName(genre.getName());

@@ -1,5 +1,6 @@
 package movieflix.service;
 
+import movieflix.entity.Country;
 import movieflix.entity.Language;
 import movieflix.exception.CountryNotFoundException;
 import movieflix.exception.LanguageAlreadyExistsException;
@@ -41,6 +42,15 @@ public class LanguageService implements  ILanguageService{
             throw new LanguageNotFoundException("Language with name: " + name + " not found");
         }
         return existing;
+    }
+
+    @Override
+    public Language checkByName(String name) {
+        Language existing = repository.findByName(name);
+        if(existing!=null) {
+            return existing;
+        }
+        return null;
     }
 
     @Override

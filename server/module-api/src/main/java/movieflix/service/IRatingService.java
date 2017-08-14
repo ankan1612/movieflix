@@ -15,7 +15,10 @@ public interface IRatingService {
      Rating findOne(String id);
      RatingId getRatingId(String id);
      List<Rating> findByMovie(Movie movie);
-     List<Rating> findByUser(User user);
+
+    List<Rating> findByMovie(String id);
+
+    List<Rating> findByUser(User user);
      List<Double> getAverageByMovie(Movie movie);
      Rating create(Rating rating);
      Rating update(String id, Rating rating);

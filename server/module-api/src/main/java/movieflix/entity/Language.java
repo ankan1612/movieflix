@@ -37,6 +37,7 @@ public class Language {
     @GeneratedValue(generator = "customUUID")
     private  String langId;
     @NotNull
+    @Column(unique = true)
     private String name;
 
 }

@@ -1,6 +1,7 @@
 package movieflix.service;
 
 import movieflix.entity.Actor;
+import movieflix.entity.Language;
 import movieflix.exception.ActorAlreadyExistsException;
 import movieflix.exception.ActorNotFoundException;
 import movieflix.repository.IActorRepository;

@@ -22,6 +22,11 @@ public class RatingController {
     {
         return service.findAll();
     }
+    @RequestMapping(method = RequestMethod.GET, path = "movie/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public List<Rating> findAllByMovie(@PathVariable("id") String id)
+    {
+        return service.findByMovie(id);
+    }
     @RequestMapping(method = RequestMethod.GET, path = "{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Rating findOne(@PathVariable("id") String id)
     {
