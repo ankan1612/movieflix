@@ -28,8 +28,8 @@ public class UserController {
     {
         return service.findOne(id);
     }
-    @RequestMapping(method = RequestMethod.GET, path="authenticate",  produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public User findOneByEmailPassword(@RequestParam String email, @RequestParam String password)
+    @RequestMapping(method = RequestMethod.GET, path="authenticate")
+    public Boolean findOneByEmailPassword(@RequestParam String email, @RequestParam String password)
     {
         return service.findOneByEmailPassword(email,password);
     }

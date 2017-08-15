@@ -1,5 +1,6 @@
 package movieflix.service;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import movieflix.entity.User;
 import movieflix.exception.UserAlreadyExistsException;
 import movieflix.exception.UserNotFoundException;
@@ -37,12 +38,12 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public User findOneByEmailPassword(String email, String password) {
-        User existing = repository.findByEmailPassword(email,password);
-        if(existing==null) {
+    public Boolean findOneByEmailPassword(String email, String password) {
+        Boolean exits = repository.findByEmailPassword(email,password);
+        if(exits==false) {
             throw new UserNotFoundException("User with email and password combination not found");
         }
-        return existing;
+        return exits;
     }
 
     @Override

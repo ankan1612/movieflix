@@ -1,6 +1,8 @@
 package movieflix.repository;
 
 import movieflix.entity.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -13,6 +15,9 @@ import java.util.List;
  */
 @Repository
 public class UserRepository implements IUserRepository{
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @PersistenceContext
     private EntityManager em;
@@ -41,16 +46,15 @@ public class UserRepository implements IUserRepository{
     }
 
     @Override
-    public User findByEmailPassword(String email, String password) {
-        TypedQuery<User> query = em.createNamedQuery("User.findByEmailPassword",User.class);
+    public Boolean findByEmailPassword(String email, String password) {
+        TypedQuery<User> query = em.createNamedQuery("User.findByEmail",User.class);
         query.setParameter("pEmail",email);
-        query.setParameter("pPassword",password);
         List<User> users =  query.getResultList();
         if(users!=null && users.size()==1)
         {
-            return users.get(0);
+            return passwordEncoder.matches(password, users.get(0).getPassword());
         }
-        return null;
+        return false;
     }
 
     @Override
@@ -62,6 +66,7 @@ public class UserRepository implements IUserRepository{
 
     @Override
     public User create(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         em.persist(user);
         return user;
     }

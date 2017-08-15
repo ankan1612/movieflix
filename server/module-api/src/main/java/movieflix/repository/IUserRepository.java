@@ -11,7 +11,7 @@ public interface IUserRepository {
      List<User> findAll();
       User findOne(String id);
       User findByEmail(String email);
-    User findByEmailPassword(String email, String password);
+    Boolean findByEmailPassword(String email, String password);
      List<User> findByRole(String role);
       User create(User emp);
       User update(User emp);
