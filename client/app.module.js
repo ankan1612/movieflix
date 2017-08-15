@@ -15,8 +15,11 @@
       .when('/movies/:id',{
         templateUrl: 'moviedetails/moviedetails.tmpl.html'
       })
-      .when('/movies/edit/:id',{
+      .when('/edit/:id',{
         templateUrl: 'editmovie/editmovie.tmpl.html'
+      })
+      .when('/add',{
+        templateUrl: 'addmovie/addMovie.tmpl.html'
       })
       .otherwise({ 
         redirectTo: '/movies'

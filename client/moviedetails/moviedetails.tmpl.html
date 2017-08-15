@@ -141,7 +141,7 @@
       <div class="panel panel-default">
         <div class="panel-heading back-black white">
           <div class="font-20 white overflow-hid">
-            {{otherRating.id.user.firstName}} {{otherRating.id.user.lastName}}
+            {{otherRating.user.firstName}} {{otherRating.user.lastName}}
             <span class="orange" uib-rating ng-model="otherRating.ratingScore" max="movieDetailsVM.smallmaxrate" read-only="true" titles="['1','2','3']" aria-labelledby="default-rating"></span>
             <span>({{otherRating.ratingScore}})</span>
             <span class="float-right font-15">{{otherRating.timeStamp | date:'yyyy-MM-dd HH:mm:ss'}}</span>

@@ -1,0 +1,120 @@
+<div ng-controller="AddMovieContrl as addMovieVM">
+  <div class="container-fluid moviedetails-container">
+    <div class="row-fluid">
+      <div class="col-md-2 col-md-offset-2 movie-img-col">
+        <div class="movie-img">
+          <img ng-src={{AddModalPosterServ.poster}} alt="movieimage">
+        </div>
+        <div style="position: absolute; margin-left:180px;top:25px;" ng-controller="AddMoviePosterModalCtrl as $ctrl" class="modal-demo">
+          <button type="button" class="btn btn-default btn-lg" ng-click="$ctrl.open()">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="panel panel-default movie-details-header">
+          <div class="panel-heading movie-details-header">
+            <div class="col-md-10">
+              <div class="form-group">
+                <label for="Title" class="white">Title:</label>
+                <input type="text" ng-model="addMovieVM.movie.title" class="form-control font-30" id="title" placeholder="Title">
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="form-group">
+                <label for="Year" class="white">Year:</label>
+                <input type="text" style="width:100px" ng-model="addMovieVM.movie.year" class="form-control font-20" id="title" placeholder="Year">
+              </div>
+            </div>
+            <div class="panel-title white font-30">
+              <div class="font-20" style="padding: 6px 12px;">
+                <span class="orange" uib-rating ng-model="addMovieVM.movie.imdbRating" max="addMovieVM.max" read-only="addMovieVM.isReadonly" on-hover="addMovieVM.hoveringOver(value)" on-leave="addMovieVM.overStar = null" titles="['1','2','3']" aria-labelledby="default-rating"></span>
+                <span class="label" ng-class="{'label-warning': addMovieVM.percent<30, 'label-info': addMovieVM.percent>=30 && addMovieVM.percent<70, 'label-success': addMovieVM.percent>=70}" ng-show="addMovieVM.overStar && !addMovieVM.isReadonly">{{addMovieVM.percent}}%</span>
+                <span>({{addMovieVM.movie.imdbRating}})</span>
+                <label for="Votes" class="white font-15">Votes: </label>
+                <input type="text" ng-model="addMovieVM.movie.imdbVotes" class="form-control font-20" style="display:inline; width:200px; height:25px" id="title" placeholder="Votes">
+              </div>
+            </div>
+            <hr class="title-hr">
+          </div>
+          <div class="panel-body">
+            <div class="form-group font-15">
+              <div class="form-group">
+                <label for="Genre" class="white">IMDB ID: </label>
+                <input type="text" style="display:inline;width:200px;height:25px" ng-model="addMovieVM.movie.imdbId" class="form-control" id="title" placeholder="IMDB ID">
+              </div>
+            </div>
+            <div class="font-15 movie-info form-group">
+              <ul>
+                <li>
+                  <label for="Rated" class="white">Rated: </label>
+                  <input type="text" ng-model="addMovieVM.movie.rated" class="form-control" style="display:inline; width:100px; height:25px" id="title" placeholder="Rated">
+                </li>
+                <li>
+                  <label for="Language" class="white">Language: </label>
+                  <input type="text" ng-model="addMovieVM.movies.language" class="form-control" style="display:inline; width:150px; height:25px" id="title" placeholder="Language">
+                </li>
+                <li>
+                  <label for="Country" class="white">Country: </label>
+                  <input type="text" ng-model="addMovieVM.movies.country" class="form-control" style="display:inline; width:150px; height:25px" id="title" placeholder="Country">
+                </li>
+              </ul>
+            </div>
+            <div class="form-group font-15">
+              <div class="form-group">
+                <label for="Genre" class="white">Genre: </label>
+                <input type="text" style="display:inline;width:300px;height:25px" ng-model="addMovieVM.movies.genre" class="form-control" id="title" placeholder="Genre">
+              </div>
+              <div class="form-group">
+                <label for="Released" class="white">Released: </label>
+                <input type="text" style="display:inline;width:150px;height:25px" ng-model="addMovieVM.movie.released" class="form-control" id="title" placeholder="Released">
+              </div>
+              <div class="form-group">
+                <label for="Runtime" class="white">Runtime: </label>
+                <input type="text" style="display:inline;width:150px;height:25px" ng-model="addMovieVM.movie.runtime" class="form-control" id="title" placeholder="Runtime">
+              </div>
+              <div class="form-group">
+                <label for="Directed By" class="white">Directed By: </label>
+                <input type="text" style="display:inline;width:400px;height:25px" ng-model="addMovieVM.movies.director" class="form-control" id="title" placeholder="Directed By">
+              </div>
+              <div class="form-group">
+                <label for="Writen By" class="white">Writen By: </label>
+                <input type="text" style="display:inline;width:400px;height:25px" ng-model="addMovieVM.movies.writer" class="form-control" id="title" placeholder="Writen By">
+              </div>
+              <div class="form-group">
+                <label for="Cast" class="white">Cast: </label>
+                <input type="text" style="display:inline;width:400px;height:25px" ng-model="addMovieVM.movies.actor" class="form-control" id="title" placeholder="Cast">
+              </div>
+              <div class="form-group">
+                <label for="Awards" class="white">Awards: </label>
+                <input type="text" style="display:inline;width:250px;height:25px" ng-model="addMovieVM.movie.awards" class="form-control" id="title" placeholder="Awards">
+              </div>
+              <div class="form-group">
+                <label for="Awards" class="white">Metascore: </label>
+                <input type="text" style="display:inline;width:250px;height:25px" ng-model="addMovieVM.movie.metascore" class="form-control" id="title" placeholder="Metascore">
+              </div>
+              <div class="form-group">
+                <label for="Type" class="white">Type: </label>
+                <input type="text" style="display:inline;width:150px;height:25px" ng-model="addMovieVM.movies.type" class="form-control" id="title" placeholder="Type">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="col-md-8 col-md-offset-2">
+        <label for="Plot" class="white">Plot: </label>
+        <textarea rows="3" class="form-control text-area" ng-model="addMovieVM.movie.plot" placeholder="Plot"></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="row-fluid row-centered pad-top-20">
+    <div class="col-md-8 col-md-offset-2">
+      <div class="form-group">
+        <button type="button" class="btn btn-primary" ng-click="addMovieVM.addMovie()">Add Movie</button>
+        <a ng-href="#!/movies" class="btn btn-danger">Cancel</a>
+      </div>
+    </div>
+  </div>
+</div>

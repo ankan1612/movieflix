@@ -3,7 +3,7 @@
   angular.module('movieflix')
     .controller('MovieDetailsCtrl', MovieDetailsCtrl);
 
-  MovieDetailsCtrl.$inject = ['MovieDetailsService', 'OtherRatingsService', '$routeParams' , '$location'];
+  MovieDetailsCtrl.$inject = ['MovieDetailsService', 'OtherRatingsService', '$routeParams', '$location'];
 
   function MovieDetailsCtrl(MovieDetailsService, OtherRatingsService, $routeParams, $location) {
     var movieDetailsVM = this;
@@ -19,7 +19,7 @@
       movieDetailsVM.useredit.overStar = value;
       movieDetailsVM.useredit.percent = 100 * (value / movieDetailsVM.useredit.max);
     };
-    movieDetailsVM.routeparam = $routeParams.id;  // not required
+    movieDetailsVM.routeparam = $routeParams.id; // not required
     movieDetailsVM.user = {
       "userId": "884b7fa4-18e6-468a-be02-4e1c7117953d",
       "firstName": "Ankan",
@@ -79,10 +79,30 @@
     movieDetailsVM.otherRatings = OtherRatingsService.getOtherRatingsID($routeParams.id)
       .then(function(response) {
           movieDetailsVM.otherRatings = response;
+          movieDetailsVM.otherRatings.forEach(function(item) {
+            item.user = OtherRatingsService.getUserforRatings(item.userId) //pass userid  
+                        .then(function(res) {
+                            item.user = res;
+                          },
+                          function(err) {
+                            console.log(err);
+                          });
+          });
         },
         function(error) {
           console.log(error);
         });
+
+    function getUserByRating(id) {
+      return OtherRatingsService.getUserforRatings(id) //pass userid  
+        .then(function(response) {
+            return response;
+          },
+          function(error) {
+            console.log(error);
+          });
+    }
+
 
     function postUserRating() {
       movieDetailsVM.newRating.id = {

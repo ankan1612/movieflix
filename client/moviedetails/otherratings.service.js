@@ -15,6 +15,13 @@
     self.postCurrentUserRatings = postCurrentUserRatings;
     
     self.putCurrentUserRatings = putCurrentUserRatings;
+    
+    self.getUserforRatings = getUserforRatings;
+
+    function getUserforRatings(id) {  //userid 
+      return $http.get('https://api.myjson.com/bins/'+id)  //'http://localhost:8080/api/users/ + id'
+        .then(successFn, errorFn); 
+    }
 
     function putCurrentUserRatings(id, obj) {  //movieid&userid 
       return $http.put(id, obj)  //'http://localhost:8080/api/ratings/ + id'
