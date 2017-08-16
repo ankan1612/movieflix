@@ -1,0 +1,98 @@
+<div class="container-fluid login-container">
+    <div class="row-fluid row-centered">
+        <div class="login-register-row">
+            <uib-tabset active="active">
+                <uib-tab index="0" heading="Login">
+                    <div class="login-tab" ng-controller="LoginController as loginVM">
+
+                        <div class="row-fluid top-row">
+                            <div class="form-group">
+                                <label for="login_email"><span class="glyphicon glyphicon-user"></span> Email address:</label>
+                                <input type="email" class="form-control" name="login_email" ng-model="loginVM.login_email" placeholder="Email" required>
+                            </div>
+                        </div>
+                        <div class="row-fluid middle-row">
+                            <div class="form-group">
+                                <label for="login_pwd"><span class="glyphicon glyphicon-lock"></span> Password:</label>
+                                <input type="password" class="form-control" name="login_pwd" ng-model="loginVM.login_pwd" placeholder="Password" required>
+                            </div>
+                        </div>
+                        <div class="row-fluid middle-row">
+                            <div style="color:red; text-align: center" ng-if="loginVM.wrongCredential">Wrong Credentials...Try Again</div>
+                        </div>
+                        <div class="row-fluid bottom-row">
+                            <button type="submit" class="btn btn-success" ng-click="loginVM.click()">
+                                <span ng-show="loginVM.BtnText == ' Logging..in'" class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>{{loginVM.BtnText}}
+                            </button>
+                        </div>
+
+                    </div>
+                </uib-tab>
+                <uib-tab index="1" heading="Register">
+                    <div class="login-tab" ng-controller="RegisterController as registerVM">
+                        <form name="registerForm" ng-submit="registerVM.addUser()" novalidate>
+                            <div class="row top-row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="firstName"><span class="glyphicon glyphicon-user"></span> First Name:</label>
+                                        <input type="text" class="form-control" name="fname" ng-model="registerVM.user.firstName" placeholder="First Name" required>
+                                        <div ng-if="registerForm.fname.$dirty" ng-messages="registerForm.fname.$error">
+                                            <p ng-message="required" class="error">First Name is required</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="lastName"><span class="glyphicon glyphicon-user"></span> Last Name:</label>
+                                        <input type="text" class="form-control" name="lname" ng-model="registerVM.user.lastName" placeholder="Last Name" required>
+                                        <div ng-if="registerForm.lname.$dirty" ng-messages="registerForm.lname.$error">
+                                            <p ng-message="required" class="error">Last Name is required</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row middle-row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label for="register_email"><span class="glyphicon glyphicon-envelope"></span> Email address:</label>
+                                        <input type="email" class="form-control" name="register_email" ng-model="registerVM.user.register_email" placeholder="Email address" required ng-model-options="{ updateOn: 'blur' }" email-unique>
+                                        <div ng-if="registerForm.register_email.$dirty" ng-messages="registerForm.register_email.$error">
+                                            <p ng-message="required" class="error">Email is required</p>
+                                            <p ng-message="email" class="error">Email is invalid</p>
+                                            <p class="error" ng-if="registerForm.register_email.$error.usernameExists">Username is not available</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row middle-row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="register_pwd"><span class="glyphicon glyphicon-lock"></span> Password:</label>
+                                        <input type="password" class="form-control" name="register_pwd" ng-model="registerVM.user.register_pwd" placeholder="Password" required>
+                                        <div ng-if="registerForm.register_pwd.$dirty" ng-messages="registerForm.register_pwd.$error">
+                                            <p ng-message="required" class="error">Password is required</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="register_cnfpwd"><span class="glyphicon glyphicon-lock"></span> Confirm Password:</label>
+                                        <input type="password" class="form-control" name="register_cnfpwd" ng-model="registerVM.user.register_cnfpwd" placeholder="Confirm Password" required>
+                                        <div ng-if="registerForm.register_cnfpwd.$dirty" ng-messages="registerForm.register_cnfpwd.$error">
+                                            <p ng-message="required" class="error">Confirm Password is required</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row bottom-row">
+                                <button type="submit" class="btn btn-primary" ng-disabled="registerForm.$pending || !registerForm.$valid" ng-click="registerVM.Btnclick()">
+                                    <span ng-show="registerVM.BtnText == ' Registering..Please Wait!'" class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>{{registerVM.BtnText}}
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </uib-tab>
+            </uib-tabset>
+        </div>
+    </div>
+</div>

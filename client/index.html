@@ -10,9 +10,11 @@
   <link href="moviedetails/style.css" rel="stylesheet">
   <link href="editmovie/style.css" rel="stylesheet">
   <link href="addmovie/style.css" rel="stylesheet">
+  <link href="login/style.css" rel="stylesheet">
   <script>
     document.write('<base href="' + document.location + '" />')
   </script>
+  <script src="login/emailUnique.directive.js"></script>
 </head>
 
 <body>
@@ -52,8 +54,7 @@
     </div>
   </header>
   <content>
-    <div ng-view>
-    </div>
+    <div ng-view></div>
   </content>
   <footer>
   </footer>
@@ -65,14 +66,14 @@
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular-route.js"></script>
   <script src="https://cdn.jsdelivr.net/lodash/4.17.4/lodash.min.js"></script>
   <script src="app.module.js"></script>
-  <script src="navCollapse.controller.js"></script>
-  <script src="pagination.controller.js"></script>
-  <script src="movieThumbnail.directive.js"></script>
-  <script src="movies.controller.js"></script>
-  <script src="movies.service.js"></script>
-  <script src="pagination.factory.js"></script>
-  <script src="pagination.filter.js"></script>
-  <script src="toArray.filter.js"></script>
+  <script src="movielist/navCollapse.controller.js"></script>
+  <script src="movielist/pagination.controller.js"></script>
+  <script src="movielist/movieThumbnail.directive.js"></script>
+  <script src="movielist/movies.controller.js"></script>
+  <script src="movielist/movies.service.js"></script>
+  <script src="movielist/pagination.factory.js"></script>
+  <script src="movielist/pagination.filter.js"></script>
+  <script src="movielist/toArray.filter.js"></script>
   <script src="moviedetails/moviedetails.controller.js"></script>
   <script src="moviedetails/moviedetails.service.js"></script>
   <script src="moviedetails/otherratings.service.js"></script>
@@ -85,6 +86,13 @@
   <script src="addmovie/addMovieModal.service.js"></script>
   <script src="addmovie/addMoviePosterModal.controller.js"></script>
   <script src="addmovie/addMovie.service.js"></script>
+  <script src="login/login.controller.js"></script>
+  <script src="login/login.service.js"></script>
+  <script src="login/register.controller.js"></script>
+  <script src="login/registerSuccess.service.js"></script>
+  <script src="login/emailUnique.directive.js"></script>
+  <script src="login/register.service.js"></script>
+
 
 </body>
 

@@ -12,7 +12,7 @@
         callback: '&'
       },
       transclude: true,
-      templateUrl: 'movieThumbnail.tmpl.html'
+      templateUrl: 'movielist/movieThumbnail.tmpl.html'
       // controller: 'MovieCtrl',
       // controllerAs: 'moviesVm',
       //bindToController: true,

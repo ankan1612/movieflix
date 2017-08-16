@@ -9,8 +9,11 @@
 
   function movieflixConfig($routeProvider) {
     $routeProvider
-      .when('/movies',{
-        templateUrl: 'movielist.tmpl.html'
+        .when('/login',{
+            templateUrl: 'login/login.tmpl.html'
+        })
+        .when('/movies',{
+        templateUrl: 'movielist/movielist.tmpl.html'
       })
       .when('/movies/:id',{
         templateUrl: 'moviedetails/moviedetails.tmpl.html'
@@ -22,7 +25,7 @@
         templateUrl: 'addmovie/addMovie.tmpl.html'
       })
       .otherwise({ 
-        redirectTo: '/movies'
+        redirectTo: '/login'
       });
 
   }
