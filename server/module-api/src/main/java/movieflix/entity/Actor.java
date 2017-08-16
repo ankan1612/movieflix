@@ -1,6 +1,8 @@
 package movieflix.entity;
 
 import com.sun.istack.internal.NotNull;
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 
 /**
@@ -15,6 +17,8 @@ import javax.persistence.*;
 public class Actor {
 
     @Id
+    @GenericGenerator(name="customUUID", strategy="uuid2")
+    @GeneratedValue(generator = "customUUID")
     private  String actorId;
     @NotNull
     private String name;

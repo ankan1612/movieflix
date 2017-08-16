@@ -1,7 +1,6 @@
 package movieflix.service;
 
 import movieflix.entity.Actor;
-import movieflix.entity.Language;
 import movieflix.exception.ActorAlreadyExistsException;
 import movieflix.exception.ActorNotFoundException;
 import movieflix.repository.IActorRepository;
@@ -40,6 +39,16 @@ public class ActorService implements IActorService {
             throw new ActorNotFoundException("Actor with name: " + name + " not found");
         }
         return existing;
+    }
+
+    @Override
+    public Actor checkByName(String name) {
+        List<Actor> existing = repository.findbyName(name);
+        if(existing!=null && existing.size()==1)
+        {
+            return existing.get(0);
+        }
+        return null;
     }
 
     @Override

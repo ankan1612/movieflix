@@ -3,6 +3,7 @@ package movieflix.service;
 import movieflix.entity.*;
 import movieflix.exception.MovieAlreadyExistsException;
 import movieflix.exception.MovieNotFoundException;
+import movieflix.repository.IActorRepository;
 import movieflix.repository.ICountryRepository;
 import movieflix.repository.ILanguageRepository;
 import movieflix.repository.IMovieRepository;
@@ -36,6 +37,15 @@ public class MovieService implements IMovieService {
     ICountryService countryService;
 
     @Autowired
+    IActorService actorService;
+
+    @Autowired
+    IDirectorService directorService;
+
+    @Autowired
+    IWriterService writerService;
+
+    @Autowired
     ITypeService typeService;
 
     @Override
@@ -52,7 +62,7 @@ public class MovieService implements IMovieService {
         return existing;
     }
     @Override
-    public List<Movie> findbyTitle(String name) {
+    public List<Movie> findByTitle(String name) {
         List<Movie> existing = repository.findbyTitle(name);
         if(existing==null) {
             throw new MovieNotFoundException("Movie with title: " + name + " not found");
@@ -68,11 +78,11 @@ public class MovieService implements IMovieService {
         {
             throw new MovieAlreadyExistsException("Movie is already in use: " + movie.getImdbId());
         }
-        Movie newMovie = checkContraints(movie);
+        Movie newMovie = checkConstraints(movie);
         return repository.create(newMovie);
     }
 
-    public Movie checkContraints(Movie movie)
+    public Movie checkConstraints(Movie movie)
     {
         Set<Genre> genres = movie.getGenre();
         Set<Genre> newGenres = new HashSet<>();
@@ -116,6 +126,48 @@ public class MovieService implements IMovieService {
                 newCountries.add(c);
             }
         }
+        Set<Actor> actors = movie.getActor();
+        Set<Actor> newActors = new HashSet<>();
+        for(Actor a: actors)
+        {
+            Actor actorByName = actorService.checkByName(a.getName());
+            if(actorByName!=null)
+            {
+                newActors.add(actorByName);
+            }
+            else
+            {
+                newActors.add(a);
+            }
+        }
+        Set<Director> directors = movie.getDirector();
+        Set<Director> newDirectors = new HashSet<>();
+        for(Director d: directors)
+        {
+            Director directorByName = directorService.checkByName(d.getName());
+            if(directorByName!=null)
+            {
+                newDirectors.add(directorByName);
+            }
+            else
+            {
+                newDirectors.add(d);
+            }
+        }
+        Set<Writer> writers = movie.getWriter();
+        Set<Writer> newWriters = new HashSet<>();
+        for(Writer w: writers)
+        {
+            Writer writerByName = writerService.checkByName(w.getName());
+            if(writerByName!=null)
+            {
+                newWriters.add(writerByName);
+            }
+            else
+            {
+                newWriters.add(w);
+            }
+        }
         Type type = movie.getType();
         Type typeByName = typeService.checkByName(type.getName());
         if(typeByName!=null)
@@ -125,6 +177,9 @@ public class MovieService implements IMovieService {
         movie.setGenre(newGenres);
         movie.setLanguage(newLanguages);
         movie.setCountry(newCountries);
+        movie.setActor(newActors);
+        movie.setDirector(newDirectors);
+        movie.setWriter(newWriters);
         return movie;
     }
 
@@ -136,7 +191,7 @@ public class MovieService implements IMovieService {
         {
             throw new MovieNotFoundException("Movie with id: " + id + " not found");
         }
-        Movie newMovie = checkContraints(movie);
+        Movie newMovie = checkConstraints(movie);
         return repository.update(newMovie);
     }
 

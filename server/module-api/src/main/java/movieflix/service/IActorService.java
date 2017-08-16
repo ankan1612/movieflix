@@ -11,7 +11,10 @@ public interface IActorService {
      List<Actor> findAll();
      Actor findOne(String id);
      List<Actor> findByName(String name);
-      Actor create(Actor actor);
+
+    Actor checkByName(String name);
+
+    Actor create(Actor actor);
       Actor update(String id, Actor actor);
      void  delete(String id);
 }

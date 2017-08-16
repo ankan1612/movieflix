@@ -1,6 +1,7 @@
 package movieflix.entity;
 
 import com.sun.istack.internal.NotNull;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
@@ -16,6 +17,8 @@ import javax.persistence.*;
 public class Director {
 
     @Id
+    @GenericGenerator(name="customUUID", strategy="uuid2")
+    @GeneratedValue(generator = "customUUID")
     private  String directorId;
     @NotNull
     private String name;

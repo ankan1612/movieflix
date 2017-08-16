@@ -10,7 +10,10 @@ import java.util.List;
 public interface IDirectorService {
      List<Director> findAll();
      Director findOne(String id);
-     List<Director> findByName(String name);
+
+    Director checkByName(String name);
+
+    List<Director> findByName(String name);
       Director create(Director director);
       Director update(String id, Director director);
      void  delete(String id);

@@ -12,7 +12,10 @@ public interface IUserRepository {
       User findOne(String id);
       User findByEmail(String email);
     Boolean findByEmailPassword(String email, String password);
-     List<User> findByRole(String role);
+
+    User authenticateUser(String email, String password);
+
+    List<User> findByRole(String role);
       User create(User emp);
       User update(User emp);
      void  delete(User emp);

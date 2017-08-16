@@ -58,6 +58,21 @@ public class UserRepository implements IUserRepository{
     }
 
     @Override
+    public User authenticateUser(String email, String password) {
+        TypedQuery<User> query = em.createNamedQuery("User.findByEmail",User.class);
+        query.setParameter("pEmail",email);
+        List<User> users =  query.getResultList();
+        if(users!=null && users.size()==1)
+        {
+            if(passwordEncoder.matches(password, users.get(0).getPassword()))
+            {
+                return users.get(0);
+            }
+        }
+        return null;
+    }
+
+    @Override
     public List<User> findByRole(String role) {
         TypedQuery<User> query = em.createNamedQuery("User.findByRole",User.class);
         query.setParameter("pRole",role);

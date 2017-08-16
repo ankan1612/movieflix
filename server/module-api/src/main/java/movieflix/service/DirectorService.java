@@ -34,6 +34,16 @@ public class DirectorService implements IDirectorService {
     }
 
     @Override
+    public Director checkByName(String name) {
+        List<Director> existing = repository.findbyName(name);
+        if(existing!=null && existing.size()==1)
+        {
+            return existing.get(0);
+        }
+        return null;
+    }
+
+    @Override
     public List<Director> findByName(String name) {
         List<Director> existing = repository.findbyName(name);
         if(existing==null) {

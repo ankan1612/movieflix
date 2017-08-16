@@ -34,6 +34,16 @@ public class WriterService implements IWriterService {
     }
 
     @Override
+    public Writer checkByName(String name) {
+        List<Writer> existing = repository.findbyName(name);
+        if(existing!=null && existing.size()==1)
+        {
+            return existing.get(0);
+        }
+        return null;
+    }
+
+    @Override
     public List<Writer> findByName(String name) {
         List<Writer> existing = repository.findbyName(name);
         if(existing==null) {
